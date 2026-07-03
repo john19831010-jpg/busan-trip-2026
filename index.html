@@ -1,0 +1,4277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>釜山自由行 6天5夜 極致玩樂指南 (2026/07/19 - 07/24)</title>
+  <meta name="description" content="專為 Yen Peiju, Kuo Chanchang, Kuo Pingjui, Kuo Fengyi 量身打造的釜山6天5夜自由行互動式行程表與工具箱。">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <style>
+    /* CSS Variables for Premium Design System */
+    :root {
+      --bg-main: #0b0f19;
+      --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #151c2f 100%);
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
+      --border-color: rgba(51, 65, 85, 0.4);
+      --border-color-hover: rgba(99, 102, 241, 0.5);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.3);
+      --secondary: #8b5cf6;
+      --secondary-glow: rgba(139, 92, 246, 0.3);
+      --accent: #f43f5e;
+      --accent-glow: rgba(244, 63, 94, 0.3);
+      --success: #10b981;
+      
+      --font-outfit: 'Outfit', 'Noto Sans TC', sans-serif;
+      --font-sans: 'Noto Sans TC', sans-serif;
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+      
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Base Reset */
+    html {
+      scroll-behavior: smooth;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-main);
+      background-image: var(--bg-gradient);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Typography & Utilities */
+    h1, h2, h3, h4 {
+      font-family: var(--font-outfit);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-normal);
+      overflow: hidden;
+    }
+
+    .glass:hover {
+      border-color: var(--border-color-hover);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 30px;
+      gap: 6px;
+    }
+
+    .badge-primary {
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-secondary {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c7d2fe;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .badge-accent {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    /* Header & Hero Area with Busan Gwangan Bridge Generated Image */
+    header {
+      position: relative;
+      padding: 90px 0 70px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(11, 15, 25, 0.35) 0%, rgba(11, 15, 25, 0.95) 100%), 
+                  url('images/busan_header.png');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 1px solid var(--border-color);
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 40px;
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 16px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      display: inline-block;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      z-index: 1;
+      position: relative;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+    }
+
+    .members-info {
+      font-size: 1rem;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      z-index: 1;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .members-info span {
+      background: rgba(15, 23, 42, 0.6);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin: 0 4px;
+      font-family: var(--font-outfit);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* Countdown Widget */
+    .countdown-widget {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 50px;
+      margin-top: -80px; /* overlay header */
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .countdown-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .countdown-item {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .countdown-val {
+      font-family: var(--font-outfit);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .countdown-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Grid Section Dashboard */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title i {
+      color: var(--primary);
+    }
+
+    /* Flight & Hotel Card */
+    .summary-card {
+      padding: 30px;
+      height: 100%;
+    }
+
+    .flight-segment-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .flight-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 60px 1fr 100px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 16px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    @media (max-width: 600px) {
+      .flight-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+        padding: 20px;
+      }
+    }
+
+    .flight-direction {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .flight-airport {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flight-time {
+      font-family: var(--font-outfit);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .flight-name {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .flight-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .flight-line {
+      height: 2px;
+      background: var(--border-color);
+      width: 100%;
+      position: relative;
+    }
+
+    .flight-line::after {
+      content: '➔';
+      position: absolute;
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+
+    .flight-duration {
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    .flight-carrier {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 600px) {
+      .flight-carrier {
+        align-items: center;
+      }
+    }
+
+    .flight-code {
+      font-family: var(--font-outfit);
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .flight-aircraft {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Hotel Card Info */
+    .hotel-info-box {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 20px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .hotel-info-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hotel-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hotel-name-cn {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .hotel-name-kr {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hotel-address {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hotel-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hotel-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .hotel-meta-item i {
+      color: var(--primary);
+      width: 16px;
+    }
+
+    .hotel-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+
+    .hotel-link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Taxi Transfer Tool */
+    .taxi-tool-card {
+      padding: 24px;
+      height: 100%;
+    }
+
+    .taxi-logo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .taxi-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .taxi-brand-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, #ffcd00 0%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .taxi-route-calc {
+      background: rgba(15, 23, 42, 0.4);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .taxi-calc-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+
+    .taxi-calc-row:last-child {
+      margin-bottom: 0;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .taxi-calc-val {
+      font-family: var(--font-outfit);
+      color: var(--primary);
+    }
+
+    .taxi-calc-val-yellow {
+      font-family: var(--font-outfit);
+      color: #ffcd00;
+    }
+
+    .copy-memo-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+      margin-bottom: 12px;
+    }
+
+    .copy-memo-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-color-hover);
+    }
+
+    .driver-memo-card {
+      background: #ffffff;
+      color: #000000;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      border-left: 4px solid #ffcd00;
+      margin-top: 8px;
+    }
+
+    .driver-memo-label {
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .driver-memo-text {
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+
+    /* Itinerary Area */
+    .itinerary-section {
+      margin-bottom: 50px;
+    }
+
+    .days-tab-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+    }
+
+    .day-tab-btn {
+      flex: 1;
+      min-width: 120px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .day-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+
+    .day-tab-btn.active {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
+      border-color: var(--primary);
+      color: var(--text-main);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+    }
+
+    .day-tab-btn .day-num {
+      font-family: var(--font-outfit);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .day-tab-btn .day-date {
+      font-size: 0.75rem;
+    }
+
+    /* Day Content Panel */
+    .day-panel {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .day-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Banner Image with dark overlay */
+    .day-summary-banner {
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      padding: 30px;
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 120px;
+      box-shadow: var(--shadow-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .day-summary-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+      transition: transform 0.5s ease;
+    }
+
+    .day-summary-banner:hover .day-summary-bg {
+      transform: scale(1.05);
+    }
+
+    .day-summary-content {
+      position: relative;
+      z-index: 1;
+      max-width: 80%;
+    }
+
+    .day-summary-banner .badge {
+      position: relative;
+      z-index: 1;
+    }
+
+    .day-summary-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .day-summary-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Timeline style */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary) 0%, var(--secondary) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 6px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-main);
+      border: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 0.8rem;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      border-color: var(--secondary);
+      color: var(--secondary);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+    }
+
+    .timeline-content {
+      padding: 20px;
+    }
+
+    /* Two-column grid layout for text & drawing */
+    .timeline-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-card-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .timeline-illust {
+        margin: 10px 0 0 0;
+      }
+    }
+
+    .timeline-illust {
+      width: 100px;
+      height: 100px;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .timeline-content:hover .timeline-illust {
+      transform: scale(1.05) rotate(2deg);
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    .timeline-time-slot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-outfit);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .timeline-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timeline-meta-tags span {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    .timeline-meta-tags span i {
+      margin-right: 4px;
+      color: var(--primary);
+    }
+
+    /* Visit Busan Pass Calculator */
+    .vbp-section {
+      margin-bottom: 50px;
+    }
+
+    .vbp-card {
+      padding: 30px;
+    }
+
+    .vbp-calc-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .vbp-calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .vbp-intro {
+      margin-bottom: 20px;
+    }
+
+    .vbp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .vbp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .vbp-item:hover {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: var(--border-color-hover);
+    }
+
+    .vbp-item.selected {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .vbp-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .vbp-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+    }
+
+    .vbp-price {
+      font-family: var(--font-outfit);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .vbp-result-box {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+    }
+
+    .vbp-result-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .vbp-result-row.total-original {
+      color: var(--text-muted);
+    }
+
+    .vbp-result-row.pass-cost {
+      color: var(--text-main);
+    }
+
+    .vbp-result-row.savings {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-bottom: 0;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--success);
+    }
+
+    .vbp-result-val {
+      font-family: var(--font-outfit);
+    }
+
+    .vbp-saving-glowing {
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Food Grid Area */
+    .food-section {
+      margin-bottom: 50px;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .food-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Food Card Image Styles */
+    .card-image-wrapper {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .food-card:hover .card-image {
+      transform: scale(1.06);
+    }
+
+    .food-info-container {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .food-header {
+      margin-bottom: 12px;
+    }
+
+    .food-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .food-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .food-name-cn {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .food-name-kr {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .food-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .food-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .food-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all var(--transition-fast);
+    }
+
+    .food-btn:hover {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: var(--primary);
+    }
+
+    /* Checklist Section */
+    .checklist-section {
+      margin-bottom: 50px;
+    }
+
+    .checklist-card {
+      padding: 30px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .checklist-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checklist-group-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.01);
+      transition: all var(--transition-fast);
+    }
+
+    .checklist-item:hover {
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .checklist-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--success);
+    }
+
+    .checklist-text-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .checklist-item-title {
+      font-weight: 500;
+    }
+
+    .checklist-item-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .checklist-item.completed {
+      border-color: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.03);
+    }
+
+    .checklist-item.completed .checklist-item-title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* Travel Guide Info Row */
+    .info-footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .info-footer-card {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .info-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .info-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .info-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Floating Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+      padding: 14px 28px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      transform: translateY(100px) scale(0.9);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .toast i {
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+    }
+
+    footer span {
+      font-family: var(--font-outfit);
+      color: var(--primary);
+    }
+
+    /* Itinerary Two-Column Layout */
+    .itinerary-map-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 30px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+
+    /* Floating Action Button (FAB) for Mobile */
+    .mobile-map-fab {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      cursor: pointer;
+      z-index: 999;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-map-fab:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-map-fab {
+        display: none !important; /* 不再需要懸浮按鈕 */
+      }
+
+      .itinerary-map-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* 將地圖在行動版改為固定在行程最上方 */
+      .itinerary-map-col {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        z-index: 10 !important;
+        display: flex;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        order: -1; /* 地圖排在最上方 */
+        margin-bottom: 10px !important;
+      }
+
+      .itinerary-map-col .map-card {
+        width: 100%;
+        max-width: none;
+        height: 350px; /* 手機版固定適中高度 */
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-md);
+        transform: none;
+      }
+
+      #itinerary-map {
+        flex: 1;
+        height: 290px !important; /* 固定高度 */
+      }
+
+      .mobile-map-close-btn {
+        display: none !important; /* 行動版關閉按鈕不需要 */
+      }
+    }
+
+    /* 桌面版隱藏行動版的關閉按鈕 */
+    .mobile-map-close-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-map-close-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .itinerary-timeline-col {
+      min-width: 0; /* 防止 grid 溢出 */
+    }
+
+    .itinerary-map-col {
+      position: sticky;
+      top: 30px;
+      z-index: 10;
+    }
+
+    .map-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .map-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-title i {
+      color: var(--primary);
+    }
+
+    .map-reset-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-reset-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-color-hover);
+    }
+
+    #itinerary-map {
+      height: 550px;
+      max-height: calc(100vh - 160px);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1;
+    }
+
+    /* Dark Mode Leaflet Theme */
+    .leaflet-container {
+      background: #0b0f19 !important;
+    }
+    
+    .leaflet-tile-container img {
+      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
+
+    /* Custom Marker Styling */
+    .custom-map-marker {
+      background: none;
+      border: none;
+    }
+
+    .marker-pin {
+      width: 28px;
+      height: 28px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--primary);
+      position: absolute;
+      transform: rotate(-45deg);
+      left: 50%;
+      top: 50%;
+      margin: -14px 0 0 -14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+      border: 2px solid #fff;
+    }
+
+    .marker-pin::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #0b0f19;
+      position: absolute;
+    }
+
+    .marker-number {
+      position: absolute;
+      color: #fff;
+      font-family: var(--font-outfit);
+      font-weight: 800;
+      font-size: 0.8rem;
+      z-index: 10;
+      text-align: center;
+      width: 28px;
+      height: 28px;
+      line-height: 24px;
+      left: 50%;
+      top: 50%;
+      margin: -14px 0 0 -14px;
+    }
+
+    .marker-pin.hotel-marker {
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.6);
+    }
+    
+    .marker-pin.food-marker {
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+
+    .marker-pin.sec-color {
+      background: var(--secondary);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+    }
+
+    .marker-pin.rainy-marker {
+      background: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+      border: 2px dashed #fff;
+    }
+
+    @keyframes marker-pulse {
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.3); filter: brightness(1.2); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+    .pulsing-focused-marker {
+      animation: marker-pulse 0.8s ease-in-out 3 !important;
+    }
+
+    /* Leaflet popup styling override for dark mode */
+    .leaflet-popup-content-wrapper {
+      background: rgba(15, 23, 42, 0.95) !important;
+      backdrop-filter: blur(8px);
+      color: var(--text-main) !important;
+      border: 1px solid var(--border-color);
+      border-radius: 10px !important;
+      font-family: var(--font-sans) !important;
+      box-shadow: var(--shadow-lg) !important;
+    }
+
+    .leaflet-popup-tip {
+      background: rgba(15, 23, 42, 0.95) !important;
+      border-left: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .leaflet-popup-content {
+      margin: 12px 16px !important;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .leaflet-popup-content h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .leaflet-bar {
+      border: 1px solid var(--border-color) !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+
+    .leaflet-bar a {
+      background-color: rgba(30, 41, 59, 0.9) !important;
+      color: var(--text-main) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .leaflet-bar a:hover {
+      background-color: var(--primary) !important;
+      color: white !important;
+    }
+
+    .timeline-item-link-btn {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0;
+      transition: color var(--transition-fast);
+    }
+
+    .timeline-item-link-btn:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+
+    /* Target highlighted attraction */
+    .timeline-item.highlight-map .timeline-content {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+    }
+
+    /* Queue & Reservation Strategies Box */
+    .queue-strategy-box {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(244, 63, 94, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+    .queue-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .queue-desc {
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="logo-container">
+        <span class="logo-badge">Busan Trip 2026</span>
+      </div>
+      <h1>釜山自由行 6天5夜 極致玩樂指南</h1>
+      <div class="members-info">
+        成員：<span>Yen Peiju 等 3大2小 (5人家族)</span>
+      </div>
+    </header>
+
+    <!-- Flight Countdown -->
+    <section class="countdown-widget glass">
+      <div class="countdown-title"><i class="fa-solid fa-plane-departure"></i> 距離出發起飛倒數</div>
+      <div class="countdown-grid">
+        <div class="countdown-item">
+          <div class="countdown-val" id="cd-days">00</div>
+          <div class="countdown-label">DAYS 天</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-val" id="cd-hours">00</div>
+          <div class="countdown-label">HOURS 時</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-val" id="cd-minutes">00</div>
+          <div class="countdown-label">MINS 分</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-val" id="cd-seconds">00</div>
+          <div class="countdown-label">SECS 秒</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q-Version Comic Map Section -->
+    <section class="chibi-map-section" style="margin-bottom: 24px;">
+      <div class="glass" style="padding: 20px; border-radius: 16px; text-align: center;">
+        <h2 class="section-title" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-face-smile-beam"></i> 2026 釜山家族旅遊 - Q版導覽地圖與行程插畫</h2>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 16px;">
+          <!-- Map 1 -->
+          <div style="flex: 1; min-width: 320px; max-width: 580px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+            <img src="images/busan_cartoon_map.jpg" alt="2026釜山自由行Q版導覽地圖" style="width: 100%; height: auto; display: block; object-fit: contain;">
+            <div style="padding: 10px; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.1);">
+              📍 Q版 2D 導覽地圖（手繪插畫地圖風格）
+            </div>
+          </div>
+          
+          <!-- Map 2 -->
+          <div style="flex: 1; min-width: 320px; max-width: 580px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+            <img src="images/busan_chibi_map.jpg" alt="2026釜山自由行Q版行程插畫" style="width: 100%; height: auto; display: block; object-fit: contain;">
+            <div style="padding: 10px; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.1);">
+              🎨 5人家族客製化插畫（樂園、纜車、汗蒸與美食）
+            </div>
+          </div>
+        </div>
+        
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 16px; line-height: 1.4;">
+          🎉 專為 Yen Peiju 家族（3大2小）打造的雙風格卡通地圖！包含天空膠囊列車、樂天世界、Spa Land 汗蒸幕、松島海上纜車與札嘎其帝王蟹大餐！
+        </p>
+      </div>
+    </section>
+
+    <!-- Dashboard Row: Flights/Hotel & Taxi Tool -->
+    <div class="dashboard-grid">
+      
+      <!-- Flight & Hotel Summary -->
+      <div class="glass summary-card" id="flight-hotel-section">
+        <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> 航班與住宿資訊</h2>
+        
+        <div class="flight-segment-container">
+          <!-- Outbound -->
+          <div class="flight-row">
+            <div class="flight-direction">去程 ✈️</div>
+            <div class="flight-airport">
+              <span class="flight-time">12:00</span>
+              <span class="flight-name">台北 (TPE) T1</span>
+            </div>
+            <div class="flight-connector">
+              <div class="flight-line"></div>
+              <span class="flight-duration">2h 30m</span>
+            </div>
+            <div class="flight-airport">
+              <span class="flight-time">15:30</span>
+              <span class="flight-name">釜山 (PUS)</span>
+            </div>
+            <div class="flight-carrier">
+              <span class="flight-code">KE2086</span>
+              <span class="flight-aircraft">A321 NEO</span>
+            </div>
+          </div>
+          
+          <!-- Inbound -->
+          <div class="flight-row">
+            <div class="flight-direction">回程 ✈️</div>
+            <div class="flight-airport">
+              <span class="flight-time">09:00</span>
+              <span class="flight-name">釜山 (PUS)</span>
+            </div>
+            <div class="flight-connector">
+              <div class="flight-line"></div>
+              <span class="flight-duration">2h 30m</span>
+            </div>
+            <div class="flight-airport">
+              <span class="flight-time">10:30</span>
+              <span class="flight-name">台北 (TPE) T1</span>
+            </div>
+            <div class="flight-carrier">
+              <span class="flight-code">KE2085</span>
+              <span class="flight-aircraft">A321 NEO</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hotel Detail -->
+        <div class="hotel-info-box">
+          <div class="hotel-detail">
+            <span class="badge badge-primary" style="width: max-content;"><i class="fa-solid fa-hotel"></i> 全程入住飯店</span>
+            <h3 class="hotel-name-cn">Lavi de Atlan Hotel 2</h3>
+            <p class="hotel-name-kr">라비드아틀란호텔2</p>
+            <p class="hotel-address">부산 해운대구 구남로 37</p>
+            <a href="https://www.dcard.tw/@sister0705/post/256460459" target="_blank" class="hotel-link-btn">
+              <i class="fa-solid fa-bookmark"></i> 參考 Dcard 開箱推薦
+            </a>
+          </div>
+          <div class="hotel-meta">
+            <div class="hotel-meta-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>地鐵 2 號線海雲台站 3 號或 5 號出口步行 3 分鐘</span>
+            </div>
+            <div class="hotel-meta-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>大樓前台位於 3 樓，下樓即是海雲台傳統市場與超商</span>
+            </div>
+            <div class="hotel-meta-item">
+              <i class="fa-solid fa-umbrella-beach"></i>
+              <span>步行 2 分鐘直達海雲台沙灘海岸線</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Kakao T Taxi Assistant -->
+      <div class="glass taxi-tool-card" id="taxi-helper-section">
+        <div class="taxi-logo-header">
+          <div class="taxi-brand">
+            <i class="fa-solid fa-taxi" style="color: #ffcd00; font-size: 1.4rem;"></i>
+            <span class="taxi-brand-name">Kakao T / Uber</span>
+          </div>
+          <span class="badge badge-accent">4人搭乘最推薦</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+          釜山計程車價格合理，4人出行平分後甚至比地鐵還划算，還能免去拖行李爬樓梯之苦！
+        </p>
+        
+        <div class="taxi-route-calc">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">預估機場 ➔ 海雲台車資 (約50分)</div>
+          <div class="taxi-calc-row">
+            <span>一般計程車 (Medium)</span>
+            <span class="taxi-calc-val">約 30,000 KRW</span>
+          </div>
+          <div class="taxi-calc-row">
+            <span>大型/模範 (Jumbo/Deluxe)</span>
+            <span class="taxi-calc-val">約 45,000 KRW</span>
+          </div>
+          <div class="taxi-calc-row">
+            <span>每人平分 (大型計程車)</span>
+            <span class="taxi-calc-val-yellow">約 11,250 KRW (NT$ 270)</span>
+          </div>
+        </div>
+        
+        <button class="copy-memo-btn" onclick="copyTaxiMemo()">
+          <i class="fa-regular fa-copy"></i> 複製司機韓文溝通小卡
+        </button>
+        
+        <div class="driver-memo-card">
+          <div class="driver-memo-label">🚗 拿給計程車司機看：</div>
+          <div class="driver-memo-text" id="taxi-memo-text">기사님, 해운대 라비드아틀란호텔2(구남로 37)로 가주세요. 감사합니다.</div>
+          <div style="font-size: 0.65rem; color: #777; margin-top: 4px;">（翻譯：司機大哥，請帶我們到海雲台Lavi de Atlan 2飯店，謝謝。）</div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Interactive Itinerary Section -->
+    <section class="itinerary-section" id="itinerary-section">
+      <h2 class="section-title"><i class="fa-regular fa-calendar-days"></i> 六天五夜詳細行程規劃</h2>
+      
+      <!-- Day Tabs -->
+      <div class="days-tab-container">
+        <button class="day-tab-btn active" onclick="switchDay(1)">
+          <span class="day-num">DAY 1</span>
+          <span class="day-date">7/19 (週日)</span>
+        </button>
+        <button class="day-tab-btn" onclick="switchDay(2)">
+          <span class="day-num">DAY 2</span>
+          <span class="day-date">7/20 (週一)</span>
+        </button>
+        <button class="day-tab-btn" onclick="switchDay(3)">
+          <span class="day-num">DAY 3</span>
+          <span class="day-date">7/21 (週二)</span>
+        </button>
+        <button class="day-tab-btn" onclick="switchDay(4)">
+          <span class="day-num">DAY 4</span>
+          <span class="day-date">7/22 (週三)</span>
+        </button>
+        <button class="day-tab-btn" onclick="switchDay(5)">
+          <span class="day-num">DAY 5</span>
+          <span class="day-date">7/23 (週四)</span>
+        </button>
+        <button class="day-tab-btn" onclick="switchDay(6)">
+          <span class="day-num">DAY 6</span>
+          <span class="day-date">7/24 (週五)</span>
+        </button>
+      </div>
+
+      <div class="itinerary-map-layout">
+        <!-- Itinerary Timeline Panel (Left Column) -->
+        <div class="itinerary-timeline-col">
+          <!-- Day 1 Panel -->
+          <div id="day-panel-1" class="day-panel active">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Haeundae Street">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第一天：抵達釜山，放鬆的海雲台度假夜</div>
+                <div class="day-summary-desc">搭乘航班抵達金海機場，搭乘計程車直達海雲台飯店辦理入住，晚餐享用超人氣烤肉，隨後漫步沙灘與傳統市場。</div>
+              </div>
+              <span class="badge badge-accent"><i class="fa-solid fa-plane-arrival"></i> 抵達釜山</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day1.jpg" alt="DAY 1 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 1 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day1.jpg" alt="DAY 1 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 1 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-plane-arrival"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 15:30 - 16:30</div>
+                        <span class="badge badge-primary">大韓航空 KE2086</span>
+                      </div>
+                      <h3 class="timeline-title">大韓航空 KE2086 抵達金海機場</h3>
+                      <p class="timeline-desc">飛機於 15:30 順利降落釜山金海國際機場，通關出關預計需 45 - 60 分鐘。出關後可先於機場大廳領取網卡或更換韓元。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>김해국제공항</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('김해국제공항', '已複製金海機場韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Flight SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0f172a"/>
+                        <path d="M15,50 Q45,35 75,50 T90,40" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" fill="none"/>
+                        <path d="M45,30 L65,45 L85,45 L88,48 L68,48 L60,65 L52,65 L57,48 L45,48 Z" fill="#3b82f6"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-taxi"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 16:30 - 17:30</div>
+                        <span class="badge badge-secondary">計程車移動</span>
+                      </div>
+                      <h3 class="timeline-title">搭乘兩台一般計程車直達飯店</h3>
+                      <p class="timeline-desc">5人出遊因計程車上限4人，必須拆搭兩台計程車。建議直接利用 Kakao T 或 Uber App 同時叫車。車程約 50 分鐘，兩台總車資預計約 70,000 - 85,000 KRW，直達海雲台飯店辦理 Check-in。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-hotel"></i> Lavi de Atlan Hotel 2 (라비드아틀란호텔2)</span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('라비드아틀란호텔2', '已複製飯店韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운代구 구남로 37', '已複製飯店韓文地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Taxi SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e293b"/>
+                        <rect x="20" y="45" width="60" height="25" rx="6" fill="#f59e0b"/>
+                        <rect x="30" y="30" width="40" height="18" rx="4" fill="#1e293b"/>
+                        <circle cx="35" cy="70" r="8" fill="#0f172a"/>
+                        <circle cx="65" cy="70" r="8" fill="#0f172a"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bowl-food"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 18:30 - 20:00</div>
+                        <span class="badge badge-accent">排隊美食</span>
+                      </div>
+                      <h3 class="timeline-title">晚餐：海雲台伍班長烤肉</h3>
+                      <p class="timeline-desc">海雲台最知名的烤肉名店！以爐邊烤蛋及香氣撲鼻的烤五花肉與海鷗肉聞名。5人出行直接在門口領取號碼牌排隊，翻桌率快，美味烤肉是釜山夜的第一餐首選。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-utensils"></i> Naver Map: <strong>오반장</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('오반장', '已複製伍班長韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운대구 구남로24번길 20', '已複製伍班長韓文地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Grill BBQ SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e293b"/>
+                        <circle cx="50" cy="50" r="30" fill="#475569"/>
+                        <path d="M25,50 L75,50 M30,40 L70,40 M30,60 L70,60 M40,30 L60,30 M40,70 L60,70" stroke="#f1f5f9" stroke-width="2"/>
+                        <rect x="35" y="42" width="30" height="16" rx="3" fill="#ea580c"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-umbrella-beach"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 20:00 - 22:00</div>
+                        <span class="badge badge-secondary">休閒散步</span>
+                      </div>
+                      <h3 class="timeline-title">海雲台傳統市場與沙灘散步</h3>
+                      <p class="timeline-desc">吃飽後慢步到海雲台沙灘吹海風，欣賞璀璨夜景。隨後逛逛旁邊的海雲台傳統市場，可以買份尚國家辣炒年糕 (상국이네) 或排隊的黑糖堅果糖餅當作宵夜點心。</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">取消沙灘散步，晚餐後改前往飯店旁邊的 <strong style="color: var(--primary);">Ryan Holiday in Busan</strong> (室內 Kakao 角色體驗館) 遊玩，或在有雨棚的傳統市場內吃小吃。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> 傳統市場: 해운대시장</span>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Beach/Market SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e3a8a"/>
+                        <path d="M0,80 Q30,70 60,85 T100,75 L100,100 L0,100 Z" fill="#f59e0b"/>
+                        <circle cx="80" cy="30" r="12" fill="#ef4444"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 1 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                若抵達時下大雨，建議取消海雲台沙灘漫步。晚餐【伍班長烤肉】有室內座位不受影響。宵夜可改在有遮雨棚的【海雲台傳統市場】內用餐，或直接前往飯店旁的【Ryan Holiday in Busan】室內 Kakao 角色體驗館遊玩。
+              </p>
+            </div>
+            </div>
+          </div>
+
+          <!-- Day 2 Panel -->
+          <div id="day-panel-2" class="day-panel">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Songdo Cable Car">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第二天：松島跨海纜車、雷射槍、鑽石灣夕陽遊艇、西面 Running Man 與烤肉</div>
+                <div class="day-summary-desc">中午啟用 VBP 48H。搭乘松島跨海纜車與雷射槍，下午搭乘豪華鑽石灣遊艇欣賞廣安大橋黃金夕陽，晚上前往西面 Running Man 挑戰與大啖 83 烤肉。</div>
+              </div>
+              <span class="badge badge-primary"><i class="fa-solid fa-map-location-dot"></i> 松島 & 西面</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day2.jpg" alt="DAY 2 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 2 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day2.jpg" alt="DAY 2 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 2 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-cable-car"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 12:00 - 13:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                      </div>
+                      <h3 class="timeline-title">松島海上纜車 & 龍宮雲橋</h3>
+                      <p class="timeline-desc">11:15 從飯店出發，搭乘兩台計程車直達松島（車程約 35 分鐘，兩台車資約 38,000 KRW）。於中午 12:00 VBP 48H 通行證正式啟用，免費兌換往返水晶纜車票與龍宮雲橋門票。坐透明水晶車廂飛躍蔚藍海面，走上鐵網懸空的吊橋。</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">改前往 Centum City 的 <strong style="color: var(--primary);">Spa Land 汗蒸幕</strong> 與 <strong style="color: var(--primary);">新世界百貨</strong> 享用午餐與溫泉放鬆（全室內行程，提前至今天體驗）。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>송도해상케이블카 송도베이스테이션</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('송도해상케이블카 송도베이스테이션', '已複製松島纜車韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 서구 송도해변로 171', '已複製松島纜車地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0c4a6e"/>
+                        <line x1="0" y1="30" x2="100" y2="30" stroke="#94a3b8" stroke-width="3"/>
+                        <rect x="35" y="40" width="30" height="25" rx="6" fill="#0284c7"/>
+                        <rect x="42" y="47" width="16" height="10" rx="2" fill="#e2e8f0"/>
+                        <line x1="50" y1="30" x2="50" y2="40" stroke="#94a3b8" stroke-width="4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-crosshairs"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 13:30 - 14:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                      </div>
+                      <h3 class="timeline-title">松島雷射槍競技場 (Laser Arena)</h3>
+                      <p class="timeline-desc">位於松島纜車天空花園站 2 樓。使用 VBP 免費體驗一場室內雷射生存遊戲，與親友在迷宮般的雷射戰場中來場射擊對決，非常刺激好玩！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-crosshairs"></i> Naver Map: <strong>레이저아레나 송도점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('레이저아레나 송도점', '已複製松島雷射槍韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e1b4b"/>
+                        <path d="M25,60 L50,60 L60,45 L75,45 L75,35 L45,35 L40,45 L25,45 Z" fill="#4f46e5"/>
+                        <rect x="28" y="47" width="12" height="15" fill="#312e81"/>
+                        <line x1="75" y1="40" x2="100" y2="40" stroke="#f43f5e" stroke-width="4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Taxi to Yacht -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-taxi"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 14:30 - 15:45</div>
+                        <span class="badge badge-secondary">交通接駁</span>
+                      </div>
+                      <h3 class="timeline-title">搭計程車前往鑽石灣遊艇碼頭</h3>
+                      <p class="timeline-desc">在松島天空花園周邊享用下午茶或點心後，搭乘兩台計程車前往【龍湖灣遊艇客運碼頭】（車程約 25 分鐘，兩台車資約 20,000 KRW），提前於 16:00 前完成報到手續準備登船。</p>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#eab308"/>
+                        <rect x="20" y="45" width="60" height="25" rx="5" fill="#1e293b"/>
+                        <circle cx="35" cy="70" r="10" fill="#0f172a"/>
+                        <circle cx="65" cy="70" r="10" fill="#0f172a"/>
+                        <rect x="25" y="32" width="40" height="15" rx="3" fill="#ffffff"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Diamond Bay Yacht -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-ship"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 16:30 - 17:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                      </div>
+                      <h3 class="timeline-title">廣安大橋鑽石灣遊艇 (夕陽航班)</h3>
+                      <p class="timeline-desc">使用 VBP 免費預訂下午 16:30 的黃金夕陽班次（需事先以 Email 預約）。搭乘高檔雙體遊艇出海，迎著溫柔海風，在海面上欣賞廣安大橋、五六島與釜山沿岸在落日餘暉下的絕美金黃景色，比夜航更容易拍出清晰好看的全家福！</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">遊艇若因大雨取消，可提前搭計程車去西面 <strong style="color: var(--primary);">三井大樓 (Samjung Tower)</strong> 玩室內 Running Man 與大創逛街。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-anchor"></i> Naver Map: <strong>다이아몬드베이</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('다이아몬드베이', '已複製遊艇港口韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 남구 분포로 24 용호만유람선터미널', '已複製遊艇港口地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0c4a6e"/>
+                        <path d="M20,65 L80,65 L70,75 L30,75 Z" fill="#e2e8f0"/>
+                        <polygon points="50,20 50,60 30,60" fill="#f8fafc"/>
+                        <polygon points="53,25 53,60 65,60" fill="#f8fafc"/>
+                        <line x1="51" y1="15" x2="51" y2="65" stroke="#475569" stroke-width="2"/>
+                        <path d="M0,70 Q25,65 50,70 T100,70 L100,100 L0,100 Z" fill="#0284c7" opacity="0.7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Running Man -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-person-running"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 18:00 - 19:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                      </div>
+                      <h3 class="timeline-title">西面 Running Man 體驗館</h3>
+                      <p class="timeline-desc">遊艇靠港後，搭乘兩台計程車前往西面三井大樓 10 樓（車程約 20 分鐘，兩台車資約 18,000 KRW）。使用 VBP 免費兌換門票，最後入場時間為 19:00。挑戰大型室內障礙迷宮與有趣的體能闖關，大人小孩都玩得超開心！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-building"></i> Naver Map: <strong>런닝맨 부산점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('런닝맨 부산점', '已複製 Running Man 韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 부산진구 중앙대로 672 삼정타ワー 10층', '已複製 Running Man 地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0284c7"/>
+                        <circle cx="50" cy="25" r="8" fill="#ffffff"/>
+                        <path d="M50,33 L50,55 L35,75 M50,55 L65,75 M50,40 L30,50 M50,40 L70,45" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-cart-shopping"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 19:30 - 20:00</div>
+                        <span class="badge badge-secondary">商圈購物</span>
+                      </div>
+                      <h3 class="timeline-title">西面商圈與大創 (Daiso) 快速採買</h3>
+                      <p class="timeline-desc">三井大樓出來後步行 3 分鐘即可到達西面大創旗艦店，整棟好逛好買。順便逛逛西面地下街與流行服飾店。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-store"></i> Naver Map: <strong>다이소 부산서면점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('다이소 부산서면점', '已複製西面大創韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 부산진구 중앙대로 702', '已複製西面大創地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#db2777"/>
+                        <rect x="25" y="40" width="50" height="40" rx="4" fill="#fdf2f8"/>
+                        <path d="M35,40 C35,25 65,25 65,40" stroke="#fdf2f8" stroke-width="5" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bowl-food"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 20:00 - 22:00</div>
+                        <span class="badge badge-accent">排隊美食</span>
+                      </div>
+                      <h3 class="timeline-title">晚餐：西面 83烤肉 (83해치)</h3>
+                      <p class="timeline-desc">西面站 8 號出口步行 2 分鐘，超高人氣排隊名店！主打外脆內嫩的多汁烤豬五花，全程由親切的店員為你代烤，搭配獨特海鹽與小菜，美味絕倫。吃完後搭乘兩台計程車返回海雲台飯店。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-utensils"></i> Naver Map: <strong>83해치</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('83해치', '已複製 83烤肉韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 부산진구 서전로 11-1', '已複製 83烤肉地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                      <div class="queue-strategy-box">
+                        <div class="queue-title"><i class="fa-solid fa-circle-exclamation"></i> 台灣人排隊攻略</div>
+                        <div class="queue-desc">不可預約。建議 19:15 先用 CatchTable App 進行線上遠端抽號排隊！</div>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e293b"/>
+                        <circle cx="50" cy="50" r="30" fill="#475569"/>
+                        <path d="M25,50 L75,50 M30,40 L70,40 M30,60 L70,60 M40,30 L60,30 M40,70 L60,70" stroke="#f1f5f9" stroke-width="2"/>
+                        <rect x="35" y="42" width="30" height="16" rx="3" fill="#ea580c"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 2 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                若下雨導致【松島纜車/雲橋】與【夕陽遊艇】停駛/取消：
+                <br>• <strong style="color: var(--text-main);">上午備案</strong>：改前往 Centum City 的【新世界百貨】與【Spa Land 汗蒸幕】（提前至今天體驗，全室內超舒服）。
+                <br>• <strong style="color: var(--text-main);">下午/晚上備案</strong>：前往西面【三井大樓 (Samjung Tower)】體驗室內【Running Man】與大創購物，晚餐吃室內【83烤肉】。整天完全不淋雨！
+              </p>
+            </div>
+            </div></div>
+
+          <!-- Day 3 Panel -->
+          <div id="day-panel-3" class="day-panel">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Gijang Coast">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第三天：東釜山樂園冒險與海雲台 LCT 百萬夜景</div>
+                <div class="day-summary-desc">造訪海上神殿，品嚐機張鮮美松葉蟹，暢玩樂天世界與 Luge 滑車，晚上回到海雲台登上 100 樓 X the Sky 觀景台欣賞璀璨海景夜景。</div>
+              </div>
+              <span class="badge badge-primary"><i class="fa-solid fa-map-location-dot"></i> 機張 & 廣安</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day3.jpg" alt="DAY 3 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 3 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day3.jpg" alt="DAY 3 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 3 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <!-- EGG DROP Breakfast Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bread-slice"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 08:00 - 08:45</div>
+                        <span class="badge badge-food">美味早餐</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 0)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">EGG DROP (海雲台店)</h3>
+                      <p class="timeline-desc">從飯店步行僅需 2 分鐘（約 150 公尺）。超人氣韓式奶油歐姆蛋吐司，厚實香嫩，是快速又美味的早餐選擇！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>에그드랍 해운대점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('에그드랍 해운대점', '已複製 EGG DROP 海雲台店韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해雲台區 구남로24번길 8', '已複製 EGG DROP 地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#581c0c"/>
+                        <rect x="25" y="30" width="50" height="45" rx="8" fill="#f59e0b"/>
+                        <path d="M20,60 L80,60 L75,80 L25,80 Z" fill="#eab308"/>
+                        <circle cx="50" cy="45" r="15" fill="#ffffff"/>
+                        <circle cx="50" cy="45" r="10" fill="#fbbf24"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Haedong Yonggungsa Temple Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-gopuram"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 08:45 - 10:30</div>
+                        <span class="badge badge-primary">經典景點</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 1)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">海東龍宮寺</h3>
+                      <p class="timeline-desc">搭乘兩台計程車前往（車程約 25-30 分鐘，兩台總車資約 24,000 KRW）。這是韓國唯一建在海邊斷崖上的寺廟，依山傍海，景色極其雄偉壯麗，聽著海浪敲擊礁石的聲音參拜，心靈十分平靜。</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">取消戶外參拜，改去隔壁的 <strong style="color: var(--primary);">國立海洋科技博物館</strong> (全室內免門票，有室內水族館與標本，非常適合小孩)。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>해동용궁사</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('해동용궁사', '已複製海東龍宮寺韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 기장군 기장읍 용궁길 86', '已複製海東龍宮寺地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#065f46"/>
+                        <rect x="30" y="40" width="40" height="40" fill="#d1d5db"/>
+                        <polygon points="20,40 50,15 80,40" fill="#b91c1c"/>
+                        <rect x="42" y="55" width="16" height="25" fill="#78350f"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gijang Crab Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-shrimp"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 10:45 - 12:45</div>
+                        <span class="badge badge-food">頂級海鮮</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 2)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">午餐：機張市場松葉蟹大餐</h3>
+                      <p class="timeline-desc">搭計程車至機張市場（約 15 分鐘，16,000 KRW）。強烈推薦造訪市場內的「雪蟹之家 (대게하우스)」，現場親自挑选活跳跳的鮮美松葉蟹，蒸熟後有阿姨貼心為你剪蟹開殼，肉質極其甘甜飽滿，最後必點蟹膏炒飯！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-utensils"></i> Naver Map: <strong>대게하우스</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('대게하우스', '已複製雪蟹之家韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 기장군 기장읍 읍내로 104', '已複製雪蟹之家地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#450a0a"/>
+                        <ellipse cx="50" cy="50" rx="20" ry="15" fill="#ef4444"/>
+                        <circle cx="43" cy="33" r="3" fill="#ffffff"/>
+                        <circle cx="43" cy="33" r="1.5" fill="#000000"/>
+                        <circle cx="57" cy="33" r="3" fill="#ffffff"/>
+                        <circle cx="57" cy="33" r="1.5" fill="#000000"/>
+                        <path d="M25,45 Q15,40 20,30" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M25,50 Q10,50 15,42" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M25,55 Q12,65 22,60" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M75,45 Q85,40 80,30" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M75,50 Q90,50 85,42" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M75,55 Q88,65 78,60" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lotte World Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-castle"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 13:00 - 16:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 3)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">樂天世界 Adventure 釜山</h3>
+                      <p class="timeline-desc">搭計程車前往樂天世界（約 12 分鐘，兩台車資約 14,000 KRW）。使用 VBP 免費兌換一日通票。這是一座以大自然與精靈為主題的樂園，夢幻的城堡場景與各種刺激的雲霄飛車是拍照打卡亮點！</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">改前往影島 <strong style="color: var(--primary);">Arte Museum 釜山</strong> 觀看震撼的室內 3D 數位展，或在隔壁的 <strong style="color: var(--primary);">樂天 Premium Outlet 東釜山店</strong> 逛街躲雨。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>롯데월드 어드벤처 부산</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('롯데월드 어드벤처 부산', '已複製樂天世界韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 기장군 기장읍 동부산관광로 42', '已複製樂天世界地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#312e81"/>
+                        <rect x="25" y="50" width="50" height="35" fill="#4b5563"/>
+                        <rect x="15" y="40" width="15" height="45" fill="#374151"/>
+                        <rect x="70" y="40" width="15" height="45" fill="#374151"/>
+                        <polygon points="12,40 22,20 32,40" fill="#1e40af"/>
+                        <polygon points="67,40 77,20 87,40" fill="#1e40af"/>
+                        <polygon points="40,50 50,30 60,50" fill="#1e40af"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Luge Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-truck-fast"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 16:30 - 18:30</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 4)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">Skyline Luge 釜山斜坡滑車</h3>
+                      <p class="timeline-desc">就在樂天世界隔壁。使用 VBP 免費兌換斜坡滑車 2 回券！搭乘高空滑雪吊椅上山，隨後駕駛無動力滑車順著斜坡軌道過彎疾馳而下，速度感十足，還能一邊欣賞落日海景！</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">滑車因雨關閉時，可改在樂天 Outlet 内的海景室內咖啡廳休息，隨後提前前往海雲台。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>스카이라인루지 부산</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('스카이라인루지 부산', '已複製 Luge 韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 기장군 기장읍 기장해안로 205', '已複製 Luge 地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#062f4f"/>
+                        <path d="M10,80 Q50,70 50,50 Q50,30 90,20" stroke="#475569" stroke-width="16" fill="none" stroke-linecap="round"/>
+                        <rect x="35" y="48" width="26" height="14" rx="4" fill="#e11d48" transform="rotate(-10 48 55)"/>
+                        <circle cx="40" cy="62" r="4" fill="#000000"/>
+                        <circle cx="56" cy="59" r="4" fill="#000000"/>
+                        <circle cx="48" cy="42" r="7" fill="#fbbf24"/>
+                        <rect x="49" y="41" width="6" height="3" fill="#000000"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Haeundae X the Sky Night View -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-tower-observation"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 19:30 - 21:00</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(3, 5)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">海雲台 LCT X the Sky 觀景台</h3>
+                      <p class="timeline-desc">從東釜山搭乘兩台計程車返回海雲台飯店區（車程約 20 分鐘，兩台車資約 26,000 KRW）。回程直接購買外帶【PURADAK CHICKEN 炸雞海雲台店】。隨後步行前往隔壁的 LCT 地標大樓，使用 VBP 免費兌換門票登上 100 樓觀景台！在全景玻璃前俯瞰海雲台沙灘與廣安大橋的璀璨百萬夜景，還可以體驗刺激的透明玻璃步道！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>부산엑스더스카이</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('부산엑스더스카이', '已複製 X the Sky 韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운대구 달맞意길 30', '已複製觀景台地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e1b4b"/>
+                        <rect x="42" y="10" width="16" height="80" fill="#475569"/>
+                        <rect x="35" y="20" width="30" height="12" rx="4" fill="#0284c7"/>
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="#f1f5f9" stroke-width="2"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 3 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                若東釜山下雨，【海東龍宮寺】石階濕滑且【樂天世界/Luge滑車】多為戶外設施：
+                <br>• <strong style="color: var(--text-main);">上午備案</strong>：取消龍宮寺，改去隔壁的【國立海洋科技博物館】（免門票，有室內水族館與標本，極適合小孩）。
+                <br>• <strong style="color: var(--text-main);">午餐備案</strong>：【機張市場松葉蟹】為室內餐廳，照常享用。
+                <br>• <strong style="color: var(--text-main);">下午備案</strong>：取消樂天世界與滑車，改前往影島【Arte Museum 釜山】體驗室內光影藝術，或至【樂天 Premium Outlet 東釜山店】室內逛街。
+                <br>• <strong style="color: var(--text-main);">晚上備案</strong>：【LCT X the Sky 觀觀台】為全室內，可照常登頂（若霧大能見度低，可改去海雲台【Sea Life 釜山水族館】）。
+              </p>
+            </div>
+            </div></div>
+
+          <!-- Day 4 Panel -->
+          <div id="day-panel-4" class="day-panel">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Haeundae beach">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第四天：壓線 Spa Land 頂級汗蒸幕與海雲台膠囊列車</div>
+                <div class="day-summary-desc">早上在 VBP 48H 到期前壓線進入 Spa Land 享用頂級汗蒸，下午放鬆搭乘預約好的海雲台藍線公園天空膠囊列車，晚上吃超美味味贊王烤肉。</div>
+              </div>
+              <span class="badge badge-primary"><i class="fa-solid fa-map-location-dot"></i> 海雲台 & Centum City</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day4.jpg" alt="DAY 4 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 4 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day4.jpg" alt="DAY 4 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 4 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <!-- 大海鮑魚粥 Breakfast Card -->
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bowl-food"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 09:00 - 10:15</div>
+                        <span class="badge badge-food">釜山必吃早餐</span>
+                        <button class="map-focus-btn" onclick="focusMapOnLocation(4, 0)"><i class="fa-solid fa-crosshairs"></i> 地圖定位</button>
+                      </div>
+                      <h3 class="timeline-title">大海鮑魚粥 (바다마루전복죽)</h3>
+                      <p class="timeline-desc">沿海灘散步約 15 分鐘，或搭計程車 4 分鐘。釜山超人氣 30 年老店！使用活鮑魚與內臟熬煮成翠綠色粥品，味道極其香濃甘甜，鮑魚肉厚實，口感絕佳！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>바다마루전복죽</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('바다마루전복죽', '已複製大海鮑魚粥韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해運台구 달맞이길62번길 7', '已複製大海鮑魚粥地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#14532d"/>
+                        <circle cx="50" cy="50" r="30" fill="#166534" stroke="#ffffff" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="25" fill="#15803d"/>
+                        <path d="M40,40 Q50,30 60,40 Q70,50 60,60 Q50,70 40,60 Q30,50 40,40 Z" fill="#b45309"/>
+                        <path d="M42,42 C45,45 55,45 58,42" stroke="#ffffff" stroke-width="2" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-hot-tub-person"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 11:00 - 15:00</div>
+                        <span class="badge badge-primary">VBP 免費景點</span>
+                      </div>
+                      <h3 class="timeline-title">Centum City Spa Land 汗蒸幕</h3>
+                      <p class="timeline-desc">**極重要壓線！VBP 48H 於 12:00 到期！** 10:30 從海雲台出發，搭兩台計程車（約 12 分鐘，兩台車資約 12,000 KRW）前往新世界百貨，務必於 12:00 前刷卡換入場手環。使用 VBP 免費入場 4 小時。體驗全釜山最頂級的天然溫泉、各種主題高溫汗蒸房，並在裡面喝冰涼的甜米露配溫泉蛋。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>스파랜드 신세계백화점 센텀시티점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('스파랜드 신세계백화점 센텀시티점', '已複製 Spa Land 韓文名稱！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운대구 센텀남대로 35 신세계백화점센텀시티점 1F', '已複製 Spa Land 韓文地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Bath SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e293b"/>
+                        <path d="M15,60 C25,55 35,65 50,60 C65,55 75,65 85,60" stroke="#3b82f6" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M42,42 Q45,30 42,20 M50,40 Q53,28 50,18 M58,42 Q61,30 58,20" stroke="#cbd5e1" stroke-width="2" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-train"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 16:30 - 17:30</div>
+                        <span class="badge badge-primary">已預約 16:30</span>
+                      </div>
+                      <h3 class="timeline-title">海雲台藍線公園天空膠囊列車</h3>
+                      <p class="timeline-desc">從 Spa Land 出來後搭乘兩台計程車回到尾浦站（車程約 10 分鐘，兩台車資約 10,000 KRW）報到。搭乘膠囊列車（尾浦 ➔ 青沙浦）。抵達青沙浦後拍攝櫻木花道海景平交道，並搭乘海岸列車 (Beach Train) 回尾浦。</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">膠囊車在一般下雨時仍照常行駛。若因大風大雨停駛，改去海雲台沙灘旁的 <strong style="color: var(--primary);">Sea Life 釜山水族館</strong> (全室內，有海底隧道與企鵝)。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-location-arrow"></i> 尾浦站 미포정거장</span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('해운대블루라인파克 미포정거장', '已複製尾浦站韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운대구 달맞이길62번길 13', '已複製尾浦站地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                      <div class="queue-strategy-box" style="background: rgba(239, 68, 68, 0.08); border-left-color: #ef4444;">
+                        <div class="queue-title" style="color: #ef4444;"><i class="fa-solid fa-circle-exclamation"></i> 5 人乘載物理限制警告</div>
+                        <div class="queue-desc">天空膠囊列車每台車上限 4 人。5人同行**必須拆分兩台車**搭乘（例如一台3人、一台2人），請務必預訂兩台車的票，否則無法同乘！</div>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Sky Capsule SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0f172a"/>
+                        <line x1="0" y1="70" x2="100" y2="70" stroke="#64748b" stroke-width="4"/>
+                        <rect x="25" y="25" width="50" height="40" rx="12" fill="#ef4444"/>
+                        <rect x="25" y="45" width="50" height="20" fill="#fbbf24" rx="4"/>
+                        <rect x="33" y="32" width="14" height="12" rx="3" fill="#1e293b"/>
+                        <rect x="53" y="32" width="14" height="12" rx="3" fill="#1e293b"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bowl-food"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 18:00 - 20:00</div>
+                        <span class="badge badge-accent">必吃烤肉</span>
+                      </div>
+                      <h3 class="timeline-title">晚餐：味贊王鹽烤肉 (海雲台店)</h3>
+                      <p class="timeline-desc">位於海雲台地鐵站附近，主打 3.5 公分極厚切豬五花，店員代烤鎖住肉汁，金黃酥脆的烤五花肉配上石鍋飯與大醬湯，讓人欲罷不能。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-utensils"></i> Naver Map: <strong>맛찬들왕소금구이 해운대점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('맛찬들왕소금구이 해운대점', '已複製味贊王海雲台店韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 해운대구 우동1로20번길 37', '已複製味贊王地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                      <div class="queue-strategy-box">
+                        <div class="queue-title"><i class="fa-solid fa-circle-exclamation"></i> 台灣人現場排隊攻略</div>
+                        <div class="queue-desc">不接受線上預約。必須到現場在 CatchTable 排隊機器輸入 Email 或台灣手機號碼（+886）。如果尖峰排隊長，推薦直接去點外帶，或是於 15:00-17:00 離峰吃！</div>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Steaming bowl SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#2d1a12"/>
+                        <circle cx="50" cy="55" r="30" fill="#ea580c"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 4 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                【Spa Land】與【味贊王烤肉】為全室內不受影響。若【天空膠囊列車】因強風大雨停駛：
+                <br>• <strong style="color: var(--text-main);">下午備案</strong>：改去海雲台沙灘旁的【Sea Life 釜山水族館】（全室內，有海底隧道與企鵝，非常適合小孩），或在飯店附近大型海景室內咖啡廳喝茶看海。
+              </p>
+            </div>
+            </div>
+          </div>
+
+          <!-- Day 5 Panel -->
+          <div id="day-panel-5" class="day-panel">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Arte Museum">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第五天：影島大探索、沉浸式藝術展與南浦洞購物美食</div>
+                <div class="day-summary-desc">造訪影島全新 Arte Museum，漫步白淺灘文化村與吃海女拉麵，下午前往南浦洞大啖李在模比薩、採購韓國高品質棉被，並在札嘎其帝王蟹大餐畫下完美句點。</div>
+              </div>
+              <span class="badge badge-primary"><i class="fa-solid fa-map-location-dot"></i> 影島 & 南浦洞</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day5.jpg" alt="DAY 5 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 5 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day5.jpg" alt="DAY 5 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 5 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-palette"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 10:00 - 12:30</div>
+                        <span class="badge badge-secondary">網美景點</span>
+                      </div>
+                      <h3 class="timeline-title">影島 Arte Museum 釜山</h3>
+                      <p class="timeline-desc">搭乘兩台計程車直達影島（約 30 分鐘，兩台車資約 34,000 KRW）。這是釜山最大規模的數位光影藝術美術館，以「自然」為主題，逼真的裸眼 3D 瀑布與極光沙灘，帶來極度震撼的視覺與感官體驗！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-camera"></i> Naver Map: <strong>아르떼뮤지엄  부산</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('아르떼뮤지엄  부산', '已複製 Arte Museum 韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 영도구 해양로247번길 29', '已複製 Arte Museum 地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Art Museum Gallery SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0f172a"/>
+                        <path d="M15,40 C35,15 65,15 85,40 L85,85 L15,85 Z" fill="#4f46e5" opacity="0.6"/>
+                        <path d="M30,30 Q50,15 70,30 L70,85 L30,85 Z" fill="#ec4899" opacity="0.4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-fish-fins"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 12:45 - 13:45</div>
+                        <span class="badge badge-accent">特色美食</span>
+                      </div>
+                      <h3 class="timeline-title">午餐：影島海女村</h3>
+                      <p class="timeline-desc">從 Arte Museum 搭計程車前往海女村（約 10 分鐘，兩台車資約 10,000 KRW）。坐在海岸邊露天座位，體驗一邊吹海風，一邊大口吃現切新鮮海鮮（海膽、鮑魚、海參等）與招牌海膽飯捲、熱騰騰的海鮮拉麵！</p>
+                      <div class="rainy-alternative-box" style="margin-top: 10px; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.06); border-left: 3px solid var(--accent); font-size: 0.85rem; text-align: left;">
+                        <strong style="color: var(--accent);"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ 雨天替代方案：</strong>
+                        <span style="color: var(--text-muted);">取消露天海岸吃拉麵，改去影島巨型海景室內咖啡館 <strong style="color: var(--primary);">P.ARK 複合空間</strong> 享用奢華烘焙與海景午餐（完全防雨防風）。</span>
+                      </div>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-store"></i> Naver Map: <strong>영도해녀촌</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('영도해녀촌', '已複製影島海女村韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 영도구 중리남로 2-35', '已複製影島海女村地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Ocean / Sea food bowl SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#065f46"/>
+                        <circle cx="50" cy="55" r="25" fill="#f4f4f5"/>
+                        <ellipse cx="50" cy="55" r="22" ry="10" fill="#a1a1aa"/>
+                        <path d="M40,55 Q50,45 60,55" stroke="#ef4444" stroke-width="4" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-umbrella-beach"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 14:00 - 15:30</div>
+                        <span class="badge badge-spot">網美打卡</span>
+                      </div>
+                      <h3 class="timeline-title">影島白淺灘文化村 (Huinnyeoul)</h3>
+                      <p class="timeline-desc">搭計程車前往（約 12 分鐘，兩台車資約 13,000 KRW）。漫步在希臘聖托里尼風的彩色崖邊小徑，俯瞰蔚藍大橋海景。接著走下長階梯到海岸路，穿過絕美的海岸岩石隧道拍照。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-camera"></i> Naver Map: <strong>흰여울문화마을</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('흰여울문화마을', '已複製白淺灘韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 영도구 영선동4가 1043', '已複製白淺灘地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Cliff village SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0284c7"/>
+                        <path d="M0,30 L40,30 L40,50 L60,50 L60,70 L80,70 L80,90 L100,90 L100,100 L0,100 Z" fill="#e2e8f0"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-pizza-slice"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 15:45 - 17:15</div>
+                        <span class="badge badge-accent">神級美食</span>
+                      </div>
+                      <h3 class="timeline-title">午餐/下午茶：李在模 Pizza (本店)</h3>
+                      <p class="timeline-desc">搭乘兩台計程車抵達南浦洞（約 15 分鐘，兩台車資約 16,000 KRW）。全釜山甚至韓國人都為之瘋狂的傳訊手工披薩！香濃拉絲的 100% 純天然乳酪起司是其靈魂，餅皮鬆軟，是大人小孩都會愛上的神級滋味。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-store"></i> Naver Map: <strong>이재모피자 본점</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('이재모피자 본점', '已複製李在模披薩韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 중구 광복중앙로 31', '已複製李在模披薩地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                      <div class="queue-strategy-box">
+                        <div class="queue-title"><i class="fa-solid fa-circle-exclamation"></i> 台灣人排隊攻略</div>
+                        <div class="queue-desc">不可預約。必須到現場排隊機器使用 Email 登錄排隊。**5人同行大桌可能等很久，極力推薦利用專屬外帶點餐機外帶**，外帶通常僅需等待 10-20 分鐘即可取餐，可在附近找地方享用或在店外座位吃！</div>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Pizza SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#78350f"/>
+                        <path d="M50,85 L15,20 L85,20 Z" fill="#fbbf24"/>
+                        <circle cx="45" cy="40" r="5" fill="#ef4444"/>
+                        <circle cx="58" cy="55" r="4" fill="#ef4444"/>
+                        <circle cx="36" cy="30" r="4" fill="#22c55e"/>
+                        <circle cx="65" cy="30" r="4" fill="#22c55e"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bed"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 17:15 - 18:15</div>
+                        <span class="badge badge-secondary">經典採買</span>
+                      </div>
+                      <h3 class="timeline-title">韓國釜山買棉被：藝珠寢具 (국제시장 예주침구)</h3>
+                      <p class="timeline-desc">步行約 10 分鐘前往國際市場。台灣旅客口碑極佳的「藝珠寢具」，銷售超高人氣的韓國四季被與冬被，觸感無比輕柔親膚、花色精緻，且可以直接機洗。店家有提供專業的真空壓縮包裝，非常方便塞進託運行李或直接提上飛機！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-store"></i> Naver Map: <strong>예주침구</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('예주침구', '已複製藝珠寢具韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 中구 국제시장2길 5 예주침구', '已複製藝珠寢具地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Folded Quilt / Bed SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#134e4a"/>
+                        <rect x="20" y="45" width="60" height="35" rx="4" fill="#ccfbf1"/>
+                        <rect x="25" y="35" width="22" height="15" rx="3" fill="#ffffff"/>
+                        <rect x="53" y="35" width="22" height="15" rx="3" fill="#ffffff"/>
+                        <path d="M20,60 L80,60" stroke="#0d9488" stroke-width="4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bowl-food"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 18:30 - 21:00</div>
+                        <span class="badge badge-accent">海鮮盛宴</span>
+                      </div>
+                      <h3 class="timeline-title">晚餐：札嘎其市場 125 號攤位吃帝王蟹</h3>
+                      <p class="timeline-desc">步行約 12 分鐘前往著名的札嘎其漁市場。推薦前往大樓二樓的 **125 號攤位（渡邊屋）**，挑選肥美的帝王蟹，現挑現蒸，大快朵頤鮮甜蟹肉與蟹膏海苔炒飯，絕對是回台前最澎湃的一餐！</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-map-pin"></i> Naver Map: <strong>자갈치시장</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('자갈치시장', '已複製札嘎其市場韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                        <button class="timeline-item-link-btn" onclick="copyText('부산 중구 자갈치해안로 52', '已複製札嘎其市場地址！')">
+                          <i class="fa-regular fa-copy"></i> 複製地址
+                        </button>
+                      </div>
+                      <div class="queue-strategy-box" style="background: rgba(16, 185, 129, 0.08); border-left-color: #10b981;">
+                        <div class="queue-title" style="color: #10b981;"><i class="fa-solid fa-coins"></i> 台灣人點餐與預約防雷技巧</div>
+                        <div class="queue-desc">螃蟹以時價計算。5人建議買一隻 2.5-3kg 左右的帝王蟹。務必確認好「帝王蟹本身價格」與「二樓料理費、人頭醬料費」，並要求老闆加贈貝類或鮑魚等小海鮮。老闆娘會說中文，建議出發當天上午請飯店櫃檯協助電話預訂 5 人座位！</div>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Steaming Crab Plate SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#2d1a12"/>
+                        <circle cx="50" cy="55" r="32" fill="#e2e8f0"/>
+                        <ellipse cx="50" cy="55" r="22" ry="12" fill="#ef4444"/>
+                        <path d="M40,38 Q50,45 60,38 M30,55 Q50,62 70,55" stroke="#ffffff" stroke-width="2" fill="none"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 5 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                【Arte Museum 影島】、【李在模 Pizza】、【札嘎其帝王蟹】皆為室內，不受影響。若雨天導致【海女村】與【白淺灘】無法散步：
+                <br>• <strong style="color: var(--text-main);">中午備案</strong>：取消海女村露天吃麵，改前往影島的【P.ARK 複合文化空間】（超大型海景室內咖啡廳與烘焙坊，落地窗看海，完全防雨）。
+                <br>• <strong style="color: var(--text-main);">下午備案</strong>：取消白淺灘，提前前往南浦洞【光復路時裝街】與【南浦地下街】室內商圈逛街，並去國際市場【藝珠寢具】採購棉被（有雨棚防雨）。
+              </p>
+            </div>
+            </div>
+          </div>
+
+          <!-- Day 6 Panel -->
+          <div id="day-panel-6" class="day-panel">
+            <div class="day-summary-banner">
+              <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=80" loading="lazy" class="day-summary-bg" alt="Flight back">
+              <div class="day-summary-content">
+                <div class="day-summary-title">第六天：清晨啟程，載著滿滿回憶回台</div>
+                <div class="day-summary-desc">收拾行李，提早前往機場，退稅採買免稅品，平安返國。</div>
+              </div>
+              <span class="badge badge-accent"><i class="fa-solid fa-plane-departure"></i> 歸途</span>
+            </div>
+            
+            <!-- Chibi Daily Card & Daily Map -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; margin-bottom: 24px;">
+              <!-- Text Card -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_day6.jpg" alt="DAY 6 Q版漫畫行程卡" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📋 DAY 6 行程大字卡（適合長輩閱讀）
+                </div>
+              </div>
+              
+              <!-- Map -->
+              <div class="glass" style="flex: 1; min-width: 320px; max-width: 580px; padding: 12px; border-radius: 12px; text-align: center;">
+                <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+                  <img src="images/busan_map_day6.jpg" alt="DAY 6 Q版導覽地圖" loading="lazy" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+                <div style="padding: 8px 0 0 0; font-size: 0.8rem; color: var(--text-muted);">
+                  📍 DAY 6 2D 導覽地圖（手繪插畫地圖風格）
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-bell-concierge"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 06:00 - 06:15</div>
+                        <span class="badge badge-secondary">飯店退房</span>
+                      </div>
+                      <h3 class="timeline-title">退房與計程車出發</h3>
+                      <p class="timeline-desc">辦理快捷退房。06:00 從海雲台出發，搭乘前一天預約好的兩台一般計程車前往金海機場，車程約 50 分鐘。</p>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Luggage Suitcase SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e293b"/>
+                        <rect x="25" y="40" width="30" height="40" rx="4" fill="#a855f7"/>
+                        <rect x="35" y="28" width="10" height="12" stroke="#a855f7" stroke-width="4" fill="none"/>
+                        <rect x="52" y="35" width="28" height="40" rx="3" fill="#fbbf24" transform="rotate(15 66 55)"/>
+                        <circle cx="62" cy="48" r="4" fill="#1e293b" transform="rotate(15 66 55)"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-passport"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 07:00 - 08:30</div>
+                        <span class="badge badge-secondary">金海機場</span>
+                      </div>
+                      <h3 class="timeline-title">辦理登機 & 退稅</h3>
+                      <p class="timeline-desc">在大韓航空櫃檯辦理行李託運、領取登機證，並前往退稅機台掃描護照辦理退稅與免稅品採購。</p>
+                      <div class="timeline-meta-tags">
+                        <span><i class="fa-solid fa-plane"></i> Naver Map: <strong>김해국제공항</strong></span>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="timeline-item-link-btn" onclick="copyText('김해국제공항', '已複製金海機場韓文！')">
+                          <i class="fa-regular fa-copy"></i> 複製搜尋店名
+                        </button>
+                      </div>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Passport SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#1e3a8a"/>
+                        <!-- passport shape -->
+                        <rect x="25" y="20" width="50" height="60" rx="5" fill="#1e40af" stroke="#f59e0b" stroke-width="2"/>
+                        <circle cx="50" cy="48" r="10" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                        <line x1="40" y1="48" x2="60" y2="48" stroke="#f59e0b" stroke-width="1.5"/>
+                        <line x1="50" y1="38" x2="50" y2="58" stroke="#f59e0b" stroke-width="1.5"/>
+                        <text x="32" y="70" fill="#f59e0b" font-family="var(--font-outfit)" font-size="6" font-weight="bold">PASSPORT</text>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><i class="fa-solid fa-plane"></i></div>
+                <div class="timeline-content glass">
+                  <div class="timeline-card-grid">
+                    <div>
+                      <div class="timeline-header">
+                        <div class="timeline-time-slot"><i class="fa-regular fa-clock"></i> 09:00 - 10:30</div>
+                        <span class="badge badge-primary">大韓航空 KE2085</span>
+                      </div>
+                      <h3 class="timeline-title">飛返台北桃園機場</h3>
+                      <p class="timeline-desc">搭乘大韓航空 KE2085 回台。預計於上午 10:30 順利降落台北桃園機場第一航廈，結束美好的釜山之旅！</p>
+                    </div>
+                    <div class="timeline-illust">
+                      <!-- Flight to Taiwan SVG -->
+                      <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <rect width="100" height="100" rx="12" fill="#0f172a"/>
+                        <path d="M10,80 Q25,85 45,75 T90,70" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4" fill="none"/>
+                        <path d="M40,55 L60,50 L80,35 L83,38 L68,53 L90,53 Q95,53 95,56 L85,61 L88,68 L84,68 L78,60 L55,60 L40,55 Z" fill="#ffffff"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        <div class="rainy-day-box" style="margin-top: 24px; padding: 16px; border-radius: 12px; background: rgba(239, 68, 68, 0.08); border: 1px dashed rgba(239, 68, 68, 0.3); text-align: left;">
+              <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95rem;"><i class="fa-solid fa-cloud-showers-heavy"></i> 🌧️ DAY 6 雨天備案</h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 0;">
+                全程為飯店退房與機場搭機，計程車與機場大廳均為室內，不受下雨影響。請注意雨天路況可能較為擁堵，建議提早 10 分鐘於 05:50 出發。
+              </p>
+            </div>
+            </div>
+          </div>
+</div> <!-- .itinerary-timeline-col 結束 -->
+
+  <!-- Sticky Map Panel (Right Column / Mobile Modal) -->
+  <div class="itinerary-map-col" onclick="toggleMobileMap(false)">
+    <div class="glass map-card" onclick="event.stopPropagation()">
+      <div class="map-header">
+        <span class="map-title"><i class="fa-solid fa-map-location-dot"></i> 釜山行程地圖對照 - <span id="map-day-title">DAY 1</span></span>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="map-reset-btn" onclick="resetMapZoom()"><i class="fa-solid fa-expand"></i> 重設視角</button>
+          <button class="mobile-map-close-btn" onclick="toggleMobileMap(false)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div id="itinerary-map"></div>
+    </div>
+  </div>
+</div> <!-- .itinerary-map-layout 結束 -->
+    </section>
+
+    <!-- Visit Busan Pass Calculator Section -->
+    <section class="vbp-section" id="vbp-calc-section">
+      <h2 class="section-title"><i class="fa-solid fa-calculator"></i> Visit Busan Pass 省錢計算機</h2>
+      <div class="glass vbp-card">
+        <div class="vbp-calc-grid">
+          
+          <div>
+            <div class="vbp-intro">
+              <p style="font-size: 0.95rem; margin-bottom: 12px;">
+                <strong>Visit Busan Pass (VBP)</strong> 是釜山官方發行的旅遊通行證，在限定時間內可以免費入場許多昂貴的熱門景點！
+              </p>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                請勾選你們預計要去的付費景點，看看購買「48小時卡 (48H Pass)」可以為你們省下多少錢（48H 卡售價為 85,000 KRW）：
+              </p>
+            </div>
+            
+            <div class="vbp-list">
+              <div class="vbp-item selected" data-price="47000" onclick="toggleVbpItem(this, 47000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-lotteworld">
+                  <span>釜山樂天世界冒險樂園門票</span>
+                </div>
+                <span class="vbp-price">47,000 KRW</span>
+              </div>
+              
+              <div class="vbp-item selected" data-price="30000" onclick="toggleVbpItem(this, 30000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-luge">
+                  <span>Skyline Luge 釜山斜坡滑車 (2回券)</span>
+                </div>
+                <span class="vbp-price">30,000 KRW</span>
+              </div>
+
+              <div class="vbp-item selected" data-price="30000" onclick="toggleVbpItem(this, 30000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-yacht">
+                  <span>釜山鑽石灣遊艇 (夜景班次)</span>
+                </div>
+                <span class="vbp-price">30,000 KRW</span>
+              </div>
+
+              <div class="vbp-item selected" data-price="23000" onclick="toggleVbpItem(this, 23000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-spaland">
+                  <span>Centum City Spa Land 汗蒸幕</span>
+                </div>
+                <span class="vbp-price">23,000 KRW</span>
+              </div>
+
+              <div class="vbp-item selected" data-price="22000" onclick="toggleVbpItem(this, 22000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-cablecar">
+                  <span>松島海上纜車 (往返來回票)</span>
+                </div>
+                <span class="vbp-price">22,000 KRW</span>
+              </div>
+
+              <div class="vbp-item selected" data-price="19000" onclick="toggleVbpItem(this, 19000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-runningman">
+                  <span>西面 Running Man 體驗館</span>
+                </div>
+                <span class="vbp-price">19,000 KRW</span>
+              </div>
+
+              <div class="vbp-item selected" data-price="10000" onclick="toggleVbpItem(this, 10000, event)">
+                <div class="vbp-checkbox-label">
+                  <input type="checkbox" class="vbp-checkbox" checked id="chk-laserarena">
+                  <span>松島雷射槍競技場 (射擊體驗)</span>
+                </div>
+                <span class="vbp-price">10,000 KRW</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="vbp-result-box">
+            <div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px;">預算試算結果 (單人)</h3>
+              
+              <div class="vbp-result-row total-original">
+                <span>景點原價門票總和</span>
+                <span><span class="vbp-result-val" id="val-original">181,000</span> KRW</span>
+              </div>
+              
+              <div class="vbp-result-row pass-cost">
+                <span>Visit Busan Pass 48H 售價</span>
+                <span><span class="vbp-result-val">85,000</span> KRW</span>
+              </div>
+              
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
+                * 註：樂天世界、Luge、遊艇、Spa Land 與松島纜車/雷射槍等付費景點均涵蓋在此 6 天行程內，購買 VBP 48H 對大人小孩均非常划算，現省巨大差價！
+              </div>
+            </div>
+            
+            <div class="vbp-result-row savings" id="savings-row" style="color: var(--success);">
+              <span id="label-savings">共為每人省下</span>
+              <span><span class="vbp-result-val vbp-saving-glowing" id="val-savings">96,000</span> KRW</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Food Guide Visual Section -->
+    <section class="food-section" id="food-section">
+      <h2 class="section-title"><i class="fa-solid fa-fire-burner"></i> 釜山必吃舌尖美食指南</h2>
+      <div class="food-grid">
+        
+        <!-- Food 1 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/pork_soup_rice.png" loading="lazy" class="card-image" alt="豬肉湯飯">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">釜山靈魂美食</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">豬肉湯飯</span>
+                <span class="food-name-kr">돼지국밥</span>
+              </div>
+            </div>
+            <p class="food-desc">豬骨精燉數十小時的濃郁白湯，搭配軟嫩豬肉薄片，吃之前依喜好拌入辣醬、蝦醬、大把韭菜，是暖胃的首選。</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('돼지국밥 주세요', '已複製：豬肉湯飯點餐韓文')">
+                <i class="fa-regular fa-copy"></i> 複製點餐韓文
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 2 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/grilled_shellfish.png" loading="lazy" class="card-image" alt="烤貝">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">海景餐館經典</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">烤貝與海鮮拉麵</span>
+                <span class="food-name-kr">조개구이</span>
+              </div>
+            </div>
+            <p class="food-desc">青沙浦或太宗台海邊的特產。將帶子、扇貝放在炭火上烤熟，加入奶油與起司絲，配上一碗超浮誇海鮮辛拉麵。</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('조개구이', '已複製：烤貝韓文')">
+                <i class="fa-regular fa-copy"></i> 複製韓文單字
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 3 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/snow_crab.png" loading="lazy" class="card-image" alt="機張松葉蟹">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">現蒸頂級海味</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">機張松葉蟹</span>
+                <span class="food-name-kr">대게</span>
+              </div>
+            </div>
+            <p class="food-desc">機張市場活蟹現點現蒸！特別推薦路口轉角巨大螃蟹招牌的「雪蟹之家 (대게하우스)」，附贈豐富小菜（煎餅、蒸蛋等）與專人剪蟹，必點蟹膏海苔炒飯配大醬湯。</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('대게', '已複製：松葉蟹韓文')">
+                <i class="fa-regular fa-copy"></i> 複製韓文單字
+              </button>
+              <a href="https://www.facebook.com/flyfishlife/posts/-%E4%BE%86%E5%88%B0%E9%87%9C%E5%B1%B1%E6%80%8E%E9%BA%BC%E8%83%BD%E9%8C%AF%E9%81%8E-%E6%A9%9F%E5%BC%B5%E5%B8%82%E5%A0%B4-%E7%9A%84%E7%A7%8B%E5%AD%A3%E8%9E%83%E8%9F%B9%E9%82%84%E8%A8%98%E5%BE%97-2018-%E5%B9%B4%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BE%86%E6%A9%9F%E5%BC%B5%E6%99%82%E6%88%91%E5%80%91%E5%9C%A8%E5%B8%82%E5%A0%B4%E8%A3%A1%E6%AF%AB%E7%84%A1%E9%A0%AD%E7%B7%92%E5%9C%B0%E7%9E%8E%E9%80%9B%E6%9C%80%E5%BE%8C%E8%A2%AB%E8%B7%AF%E5%8F%A3%E8%BD%89%E8%A7%92%E9%82%A3%E9%96%93%E6%9C%89%E8%91%97%E8%B6%85%E5%B7%A8%E5%A4%A7%E8%9E%83%E8%9F%B9%E6%8B%9B%E7%89%8C%E7%9A%84-%E9%9B%AA%E8%9F%B9%E4%B9%8B%E5%AE%B6-%EB%8C%80%EA%B2%8C%ED%95%98%EC%9A%B0/1463835445108917/" target="_blank" class="food-btn" style="text-decoration: none; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #93c5fd; display: inline-flex; align-items: center; gap: 6px; justify-content: center; height: 100%;">
+                <i class="fa-brands fa-facebook"></i> 觀看食記推薦
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 4 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/samgyeopsal.png" loading="lazy" class="card-image" alt="熟成烤五花肉">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">超人氣韓式烤肉</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">熟成烤豬五花</span>
+                <span class="food-name-kr">삼겹살</span>
+              </div>
+            </div>
+            <p class="food-desc">推薦西面「味贊王鹽烤肉」。3.5公分超厚切豬肉，專人用溫度槍精準測量烤盤溫度後桌邊代烤，外皮微焦，咬下噴汁。</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('삼겹살 주세요', '已複製：烤五花肉點餐韓文')">
+                <i class="fa-regular fa-copy"></i> 複製點餐韓文
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 5 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/seed_hotteok.png" loading="lazy" class="card-image" alt="黑糖堅果糖餅">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">經典小吃</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">黑糖堅果糖餅</span>
+                <span class="food-name-kr">씨앗호떡</span>
+              </div>
+            </div>
+            <p class="food-desc">南浦洞 BIFF 廣場的招牌。糯米麵團油煎到酥脆，剪開塞滿大量南瓜子、葵花子、花生碎與肉桂黑糖粉，香氣逼人。</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('씨앗호떡', '已複製：堅果糖餅韓文')">
+                <i class="fa-regular fa-copy"></i> 複製韓文單字
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 6 -->
+        <div class="glass food-card">
+          <div class="card-image-wrapper">
+            <img src="images/fish_cake.png" loading="lazy" class="card-image" alt="古來思魚糕">
+          </div>
+          <div class="food-info-container">
+            <div class="food-header">
+              <div class="food-tag">傳統市場點心</div>
+              <div class="food-title-row">
+                <span class="food-name-cn">古來思魚糕</span>
+                <span class="food-name-kr">어묵</span>
+              </div>
+            </div>
+            <p class="food-desc">釜山歷史悠久的魚糕名店。有各式各樣口味的精緻魚糕（起司、鮮蝦、鮑魚、年糕等），海雲台店門口還有巨型魚糕模型！</p>
+            <div class="food-actions">
+              <button class="food-btn" onclick="copyText('어묵', '已複製：魚糕韓文')">
+                <i class="fa-regular fa-copy"></i> 複製韓文單字
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Checklist Section (localStorage state persisted) -->
+    <section class="checklist-section" id="checklist-section">
+      <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 釜山行前準備與打包清單</h2>
+      <div class="glass checklist-card">
+        <div class="checklist-grid">
+          
+          <!-- Document and Bookings -->
+          <div>
+            <h3 class="checklist-group-title"><i class="fa-solid fa-plane"></i> 證件與行程預訂</h3>
+            <div class="checklist-items">
+              <label class="checklist-item" id="item-passport" onclick="toggleChecklist('passport')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-passport">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">確認護照效期 (6個月以上)</span>
+                  <span class="checklist-item-desc">必備！出發前務必檢查效期</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-keta" onclick="toggleChecklist('keta')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-keta">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">確認免簽/申報政策</span>
+                  <span class="checklist-item-desc">出發前填寫 Q-Code 健康申報（節省出關排隊時間）</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-capsule" onclick="toggleChecklist('capsule')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-capsule">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">提前預約天空膠囊火車 (Sky Capsule)</span>
+                  <span class="checklist-item-desc">出發前 2 週的週二上午官網搶票（極熱門）</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-vbp" onclick="toggleChecklist('vbp')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-vbp">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">購買 Visit Busan Pass 48H</span>
+                  <span class="checklist-item-desc">可在線上旅行平台預購，去指定地鐵站或櫃台兌換實體卡</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Luggage Checklist -->
+          <div>
+            <h3 class="checklist-group-title"><i class="fa-solid fa-suitcase"></i> 行李打包清單</h3>
+            <div class="checklist-items">
+              <label class="checklist-item" id="item-plug" onclick="toggleChecklist('plug')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-plug">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">韓國轉接頭 (Type C / F 雙圓針)</span>
+                  <span class="checklist-item-desc">電壓 220V，充手機相機必備轉接器</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-network" onclick="toggleChecklist('network')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-network">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">eSIM 或是 韓國網卡/WIFI機</span>
+                  <span class="checklist-item-desc">確保下飛機就有順暢網路查地圖</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-apps" onclick="toggleChecklist('apps')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-apps">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">手機下載 Naver Map / Kakao T / Uber</span>
+                  <span class="checklist-item-desc">地圖導航與隨時叫計程車用</span>
+                </div>
+              </label>
+
+              <label class="checklist-item" id="item-tmoney" onclick="toggleChecklist('tmoney')">
+                <input type="checkbox" class="checklist-checkbox" id="chk-tmoney">
+                <div class="checklist-text-wrapper">
+                  <span class="checklist-item-title">交通卡 (T-Money Card) & 換匯韓元</span>
+                  <span class="checklist-item-desc">可用悠遊卡大小的 T-Money 卡乘車；帶台幣到當地民間換匯所換匯更划算</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Travel Guide & Rainy Day Plan Section -->
+    <section class="guide-section" id="guide-section" style="margin-top: 48px;">
+      <h2 class="section-title"><i class="fa-solid fa-umbrella"></i> 旅遊指南、預約攻略與雨天備案</h2>
+      <div class="glass vbp-card" style="padding: 24px;">
+        <div style="margin-bottom: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 20px;">
+          <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.1rem;"><i class="fa-solid fa-user-tie"></i> 🔔 資深導遊貼心提醒 (三大兩小家族版)</h3>
+          <ul style="list-style-type: none; padding-left: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted);">
+            <li style="margin-bottom: 10px;"><strong style="color: var(--text-main);">🧳 Day 4 行李與交通省時技巧</strong>：因為全程入住同一間海雲台飯店，<span style="color: var(--success); font-weight: bold;">第四天完全不需要退房！</span>行李全部留在房間即可。泡完 Spa Land 後，你們<span style="color: var(--primary); font-weight: bold;">可以直接搭兩台計程車直達尾浦站</span>搭乘膠囊列車（車程約 15 分鐘，免回飯店拿行李），行程最順又最省時！</li>
+            <li style="margin-bottom: 10px;"><strong style="color: var(--text-main);">👵 長輩體力與行程安全</strong>：
+              <br>• <strong style="color: var(--text-main);">海東龍宮寺 (Day 3)</strong>：進入前有約 108 階陡峭石階。若阿嬤膝蓋不適，可沿入口左側平緩小路至觀景平台遠眺海中寺廟，免爬石階。
+              <br>• <strong style="color: var(--text-main);">斜坡滑車 Luge (Day 3)</strong>：滑車需用力拉控制桿煞車。若阿嬤不方便玩，可讓她在 Luge 售票處隔壁的海景咖啡廳休息喝茶，幫大家拍照。</li>
+            <li style="margin-bottom: 10px;"><strong style="color: var(--text-main);">✈️ Day 6 清晨返程快速通關</strong>：早上 09:00 班機，06:00 需出發。<span style="color: var(--primary); font-weight: bold;">導遊提醒：</span>1. 前一晚請飯店櫃檯預約好清晨 06:00 的兩台計程車。 2. 出發前 24 小時（7/23 早上 09:00 起），在【大韓航空 App】線上辦理線上登機，取得電子登機證。至機場後直接走專用通道行李寄艙，能省下至少 30 分鐘的排隊時間！</li>
+            <li style="margin-bottom: 10px;"><strong style="color: var(--text-main);">🛏️ Day 5 買棉被與行李重量</strong>：在國際市場【藝珠寢具】買的棉被，店家提供真空壓縮打包，雖然體積縮小，但<span style="color: var(--accent); font-weight: bold;">重量不變</span>，請預留行李重量額度，或多準備一個手提袋提上飛機。</li>
+          </ul>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <h3 style="color: var(--secondary); margin-bottom: 12px; font-size: 1.1rem;"><i class="fa-solid fa-calendar-check"></i> 餐廳與景點預約攻略</h3>
+          <ul style="list-style-type: none; padding-left: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">札嘎其市場 125號（渡邊屋）</strong>：<span style="color: var(--success); font-weight: bold;">可以預約</span>。老闆娘會說流利中文。建議出發當天早上請飯店櫃檯打電話預訂 5 人座位。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">廣安大橋鑽石灣遊艇</strong>：<span style="color: var(--success); font-weight: bold;">必須預約</span>。請在台灣提前 2~3 週寄信給官方，註明使用 VBP 免費方案以預定 19:30 夜景黃金班次。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">李在模 Pizza (南浦總店)</strong>：<span style="color: var(--accent); font-weight: bold;">不可預約</span>。5人同行大桌現場排隊可能等很久，極力推薦利用專屬外帶點餐機點外帶（約 10-20 分鐘取餐），外帶到附近公園或路邊吃。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">83烤肉 & 味贊王烤肉</strong>：<span style="color: var(--accent); font-weight: bold;">不可預約</span>。皆使用 CatchTable 現場抽號排隊。83烤肉建議於 19:00 先用手機 App 遠端線上抽號；味贊王若排隊人多，可選擇外帶或於 15:00-17:00 離峰用餐。</li>
+          </ul>
+        </div>
+        
+        <div style="margin-bottom: 24px;">
+          <h3 style="color: var(--secondary); margin-bottom: 12px; font-size: 1.1rem;"><i class="fa-solid fa-cloud-showers-water"></i> 雨天備案計畫</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted);">若行程中遇到下雨，建議進行以下彈性調整：</p>
+          <ul style="list-style-type: none; padding-left: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">室內景點優先</strong>：將 <strong style="color: var(--primary);">Spa Land 汗蒸幕</strong>、<strong style="color: var(--primary);">西面 Running Man 體驗館</strong> 或 <strong style="color: var(--primary);">Arte Museum 影島</strong> 調整至雨天當日，這三個都是全室內景點，完全不受下雨影響。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">百貨購物與美食</strong>：雨天可前往 <strong style="color: var(--text-main);">Centum City 新世界百貨</strong>（與 Spa Land 共構）或是西面的 <strong style="color: var(--text-main);">三井大樓 (Samjung Tower)</strong>，兩處皆有豐富的美食街、購物商場與室內遊樂設施，吃喝玩樂一站搞定。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">室外景點調整</strong>：若遇雨，<strong style="color: var(--accent);">樂天世界</strong>、<strong style="color: var(--accent);">Skyline Luge</strong>、<strong style="color: var(--accent);">松島海上纜車 / 雲橋</strong>、<strong style="color: var(--accent);">鑽石灣遊艇</strong> 可能會關閉或嚴重影響體驗。建議視氣象預報，提早將戶外行程移至晴天。</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="color: var(--secondary); margin-bottom: 12px; font-size: 1.1rem;"><i class="fa-solid fa-gauge-simple-high"></i> 行程精簡與減速建議</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted);">若帶小孩體力不支或不想行程太趕，建議依序刪除以下景點：</p>
+          <ul style="list-style-type: none; padding-left: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">優先刪除 ➔ 松島雷射槍競技場</strong> (Day 2)：雖然在纜車大樓內，但雷射槍主要是刺激活動，若對射擊遊戲興趣一般可直接捨棄，多留時間給西面逛街。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">次要刪除 ➔ Skyline Luge 釜山斜坡滑車</strong> (Day 3)：若玩完樂天世界後覺得疲憊，可省去 Luge 滑車，直接在旁邊的樂天 Outlet 休息喝咖啡。</li>
+            <li style="margin-bottom: 8px;"><strong style="color: var(--text-main);">次要刪除 ➔ 影島海女村</strong> (Day 5)：海女村是在岩石海岸邊露天吃海鮮，夏日中午可能較為炎熱且無冷氣，可改成在 Arte Museum 內吹冷氣，隨後直接跨海去南浦洞吹冷氣享用李在模 Pizza。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Info Grid -->
+    <div class="info-footer-grid">
+      <div class="glass info-footer-card">
+        <div class="info-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3 class="info-title">電壓與插座</h3>
+        <p class="info-desc">韓國使用 220V、60Hz 的交流電。插頭為雙圓針（Type C / F），建議自備 2 個以上的圓針轉接頭，以免相機和行動電源不夠充。</p>
+      </div>
+
+      <div class="glass info-footer-card">
+        <div class="info-icon"><i class="fa-solid fa-wallet"></i></div>
+        <h3 class="info-title">貨幣與換匯</h3>
+        <p class="info-desc">1 新台幣約可兌換 42~44 韓元。推薦在台灣機場換少量乘車資，其餘帶新台幣到南浦洞民間換匯所（如友利、映真）更划算。</p>
+      </div>
+
+      <div class="glass info-footer-card">
+        <div class="info-icon"><i class="fa-solid fa-map"></i></div>
+        <h3 class="info-title">離線地圖提示</h3>
+        <p class="info-desc">Google Map 於韓國走路導航非常不準。推薦在台灣就載好 Naver Map，並於設定中下載「釜山離線地圖」，省電又好定位。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Wrapper -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-message">複製成功！</span>
+  </div>
+
+  <!-- Floating Map Action Button for Mobile Devices -->
+  <button class="mobile-map-fab" onclick="toggleMobileMap(true)">
+    <i class="fa-solid fa-map-location-dot"></i> 行程地圖
+  </button>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Have a wonderful trip to <span>Busan</span>, Peiju, Chanchang, Pingjui, Fengyi!</p>
+      <p>© 2026 釜山自由行小幫手. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    // Countdown Timer Logic
+    const targetDate = new Date("July 19, 2026 12:00:00").getTime();
+    
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      
+      if (difference <= 0) {
+        document.getElementById("cd-days").innerText = "00";
+        document.getElementById("cd-hours").innerText = "00";
+        document.getElementById("cd-minutes").innerText = "00";
+        document.getElementById("cd-seconds").innerText = "00";
+        return;
+      }
+      
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      
+      document.getElementById("cd-days").innerText = String(days).padStart(2, '0');
+      document.getElementById("cd-hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("cd-minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("cd-seconds").innerText = String(seconds).padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Copy to Clipboard Utility
+    function copyText(text, message = "複製成功！") {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(message);
+      }).catch(err => {
+        console.error("無法複製文字: ", err);
+      });
+    }
+
+    function copyTaxiMemo() {
+      const memo = document.getElementById("taxi-memo-text").innerText;
+      copyText(memo, "已複製司機韓文溝通小卡！");
+    }
+
+    // Toast Notification System
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toast-message");
+      toastMsg.innerText = message;
+      toast.classList.add("show");
+      
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    // Switch Itinerary Days (Tab System)
+    function switchDay(dayNum) {
+      // Deactivate all tabs
+      const tabs = document.querySelectorAll(".day-tab-btn");
+      tabs.forEach(tab => tab.classList.remove("active"));
+      
+      // Deactivate all panels
+      const panels = document.querySelectorAll(".day-panel");
+      panels.forEach(panel => panel.classList.remove("active"));
+      
+      // Activate target tab & panel
+      const targetTab = document.querySelectorAll(".day-tab-btn")[dayNum - 1];
+      const targetPanel = document.getElementById(`day-panel-${dayNum}`);
+      
+      if (targetTab && targetPanel) {
+        targetTab.classList.add("active");
+        targetPanel.classList.add("active");
+        
+        // Smooth scroll to timeline top (mobile friendly)
+        targetPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Update map for the switched day
+        if (typeof updateMapForDay === 'function') {
+          updateMapForDay(dayNum);
+        }
+      }
+    }
+
+    // Visit Busan Pass Calculator Logic
+    const passCost = 85000;
+
+    function toggleVbpItem(element, price, event) {
+      const checkbox = element.querySelector(".vbp-checkbox");
+      if (checkbox.disabled) return;
+      
+      // 如果點擊的是 checkbox 本身，瀏覽器已經自動翻轉 checked 狀態，不重複手動翻轉
+      if (event && event.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+      }
+      
+      if (checkbox.checked) {
+        element.classList.add("selected");
+      } else {
+        element.classList.remove("selected");
+      }
+      
+      recalculateVbp();
+    }
+
+    function recalculateVbp() {
+      let total = 0;
+      const items = document.querySelectorAll(".vbp-item");
+      items.forEach(item => {
+        const checkbox = item.querySelector(".vbp-checkbox");
+        if (checkbox && checkbox.checked) {
+          const price = parseInt(item.getAttribute("data-price")) || 0;
+          total += price;
+        }
+      });
+
+      const savings = total - passCost;
+      
+      document.getElementById("val-original").innerText = total.toLocaleString();
+      
+      const savingsValElement = document.getElementById("val-savings");
+      const labelElement = document.getElementById("label-savings");
+      const savingsRow = document.getElementById("savings-row");
+      
+      if (savings > 0) {
+        savingsValElement.innerText = savings.toLocaleString();
+        savingsValElement.className = "vbp-result-val vbp-saving-glowing";
+        savingsRow.style.color = "var(--success)";
+        labelElement.innerText = "共為每人省下";
+      } else if (savings === 0) {
+        savingsValElement.innerText = "0";
+        savingsValElement.className = "vbp-result-val";
+        savingsRow.style.color = "var(--text-main)";
+        labelElement.innerText = "剛好打平";
+      } else {
+        savingsValElement.innerText = Math.abs(savings).toLocaleString();
+        savingsValElement.className = "vbp-result-val";
+        savingsRow.style.color = "var(--accent)";
+        labelElement.innerText = "買 Pass 反而多花";
+      }
+    }
+
+    // Checklist local storage integration
+    const checklistStates = JSON.parse(localStorage.getItem("busan_checklist_2026")) || {
+      passport: false,
+      keta: false,
+      capsule: false,
+      vbp: false,
+      plug: false,
+      network: false,
+      apps: false,
+      tmoney: false
+    };
+
+    // Initialize checklist UI states
+    Object.keys(checklistStates).forEach(key => {
+      const checkbox = document.getElementById(`chk-${key}`);
+      const itemEl = document.getElementById(`item-${key}`);
+      if (checkbox && itemEl) {
+        checkbox.checked = checklistStates[key];
+        if (checklistStates[key]) {
+          itemEl.classList.add("completed");
+        }
+      }
+    });
+
+    function toggleChecklist(key) {
+      // Toggle logic
+      const checkbox = document.getElementById(`chk-${key}`);
+      const itemEl = document.getElementById(`item-${key}`);
+      
+      // Update state
+      checklistStates[key] = !checklistStates[key];
+      checkbox.checked = checklistStates[key];
+      
+      if (checklistStates[key]) {
+        itemEl.classList.add("completed");
+      } else {
+        itemEl.classList.remove("completed");
+      }
+      
+      // Save to local storage
+      localStorage.setItem("busan_checklist_2026", JSON.stringify(checklistStates));
+    }
+
+    // ====================================================
+    // Leaflet 互動地圖邏輯
+    // ====================================================
+
+    // 景點經緯度與基本資訊資料庫 (與 Timeline 卡片 100% 一對一對應)
+    const mapLocations = {
+      1: [
+        { name: "金海國際機場", lat: 35.1795, lng: 128.9382, time: "15:30", desc: "大韓航空 KE2086 抵達釜山", type: "transport" },
+        { name: "Lavi de Atlan Hotel 2", lat: 35.1616, lng: 129.1601, time: "17:30", desc: "辦理入住，位於海雲台核心位置", type: "hotel" },
+        { name: "海雲台伍班長烤肉", lat: 35.1624, lng: 129.1627, time: "18:30", desc: "晚餐：超人氣爐邊烤蛋烤豬肉", type: "food" },
+        { name: "海雲台沙灘與傳統市場", lat: 35.1615, lng: 129.1615, time: "20:00", desc: "漫步沙灘，逛傳統市場吃年糕與堅果糖餅宵夜", type: "spot" },
+        { name: "【雨天備案】Ryan Holiday in Busan", lat: 35.1606, lng: 129.1625, time: "備案", desc: "室內 Kakao 角色體驗館，雨天首選", type: "rainy_backup" }
+      ],
+      2: [
+        { name: "松島海上纜車 (松島灣站)", lat: 35.0762, lng: 129.0232, time: "12:00", desc: "VBP免費兌換，水晶車廂飛越海洋", type: "spot" },
+        { name: "松島雷射槍競技場", lat: 35.0684, lng: 129.0163, time: "13:30", desc: "VBP免費，刺激的室內生存遊戲槍戰", type: "spot" },
+        { name: "龍湖灣遊艇客運碼頭", lat: 35.1278, lng: 129.1098, time: "14:30", desc: "搭計程車抵達遊艇碼頭，準備登船", type: "transport" },
+        { name: "廣安大橋鑽石灣遊艇", lat: 35.1278, lng: 129.1098, time: "16:30", desc: "VBP免費，黃金夕陽航次欣賞絕美金黃海景", type: "spot" },
+        { name: "Running Man 體驗館 (西面)", lat: 35.1541, lng: 129.0596, time: "18:00", desc: "VBP免費兌換，室內體能運動闖關挑戰", type: "spot" },
+        { name: "西面 Daiso 旗艦店", lat: 35.1572, lng: 129.0595, time: "19:30", desc: "西面商圈逛街，採購質感小物", type: "spot" },
+        { name: "西面 83烤肉", lat: 35.1578, lng: 129.0601, time: "20:00", desc: "晚餐：西面最夯排隊代烤烤豬五花", type: "food" },
+        { name: "【雨天備案】Spa Land 汗蒸幕", lat: 35.1689, lng: 129.1296, time: "備案", desc: "若下雨則提前移至今日進行全室內放鬆", type: "rainy_backup" }
+      ],
+      3: [
+        { name: "EGG DROP (海雲台店)", lat: 35.1614, lng: 129.1593, time: "08:00", desc: "美味早餐：韓式厚歐姆蛋爆漿吐司", type: "food" },
+        { name: "機張海東龍宮寺", lat: 35.1885, lng: 129.2234, time: "08:45", desc: "建於海邊礁石上的絕美雄偉寺廟", type: "spot" },
+        { name: "機張市場雪蟹之家", lat: 35.2442, lng: 129.2223, time: "10:45", desc: "午餐：大快朵頤現點現蒸松葉蟹大餐", type: "food" },
+        { name: "樂天世界 Adventure 釜山", lat: 35.1951, lng: 129.2201, time: "13:00", desc: "VBP免費入場，東釜山大型主題樂園", type: "spot" },
+        { name: "Skyline Luge 釜山", lat: 35.1923, lng: 129.2198, time: "15:00", desc: "VBP免費體驗，急速滑車軌道俯瞰海景", type: "spot" },
+        { name: "海雲台 LCT X the Sky 觀景台", lat: 35.1596, lng: 129.1691, time: "19:30", desc: "VBP免費，登上100F全景玻璃俯瞰璀璨百萬夜景", type: "spot" },
+        { name: "【雨天備案】國立海洋科技博物館", lat: 35.1932, lng: 129.2235, time: "備案", desc: "免門票，全室內海洋生物與水族館", type: "rainy_backup" },
+        { name: "【雨天備案】樂天 Premium Outlet", lat: 35.1915, lng: 129.2132, time: "備案", desc: "樂天世界旁超大型室內商場與美食街", type: "rainy_backup" }
+      ],
+      4: [
+        { name: "大海鮑魚粥", lat: 35.1596, lng: 129.1673, time: "09:00", desc: "早餐：釜山代表性活鮑魚內臟粥", type: "food" },
+        { name: "Spa Land 汗蒸幕", lat: 35.1689, lng: 129.1296, time: "11:00", desc: "VBP壓線免費入場4小時，頂級汗蒸與溫泉消暑", type: "spot" },
+        { name: "藍線公園 尾浦站 (膠囊列車)", lat: 35.1597, lng: 129.1678, time: "16:30", desc: "已預約膠囊列車(5人拆兩車)，沿海軌行駛", type: "spot" },
+        { name: "味贊王鹽烤肉 海雲台店", lat: 35.1632, lng: 129.1612, time: "18:00", desc: "晚餐：爆汁超厚切烤豬五花", type: "food" },
+        { name: "【雨天備案】Sea Life 釜山水族館", lat: 35.1593, lng: 129.1608, time: "備案", desc: "海雲台沙灘旁大型室內水族館，雨天首選", type: "rainy_backup" }
+      ],
+      5: [
+        { name: "Arte Museum 釜山", lat: 35.0734, lng: 129.0805, time: "10:00", desc: "影島超壯觀沉浸式數位藝術美術館", type: "spot" },
+        { name: "影島海女村", lat: 35.0612, lng: 129.0825, time: "12:45", desc: "午餐：坐在崖邊大啖海膽飯捲與拉麵", type: "food" },
+        { name: "影島白淺灘文化村", lat: 35.0782, lng: 129.0435, time: "14:00", desc: "漫步彩色懸崖步道，穿過藍色海岸隧道", type: "spot" },
+        { name: "李在模 Pizza 南浦總店", lat: 35.1018, lng: 129.0289, time: "15:45", desc: "下午茶：釜山最有名手工拔絲起司比薩", type: "food" },
+        { name: "國際市場 藝珠寢具 (買棉被)", lat: 35.1009, lng: 129.0275, time: "17:15", desc: "購買極親膚柔軟韓國棉被並壓縮打包", type: "spot" },
+        { name: "札嘎其市場 125號渡邊屋", lat: 35.0968, lng: 129.0305, time: "18:30", desc: "晚餐：現挑現蒸海鮮與頂級帝王蟹大餐", type: "food" },
+        { name: "【雨天備案】P.ARK 複合文化空間", lat: 35.0864, lng: 129.0792, time: "備案", desc: "影島巨型海景室內咖啡館，落地窗看海防雨", type: "rainy_backup" },
+        { name: "【雨天備案】南浦地下街商圈", lat: 35.0978, lng: 129.0345, time: "備案", desc: "避雨室內商圈，與國際市場相連", type: "rainy_backup" }
+      ],
+      6: [
+        { name: "Lavi de Atlan Hotel 2", lat: 35.1616, lng: 129.1601, time: "06:00", desc: "留在飯店休息，清晨出發", type: "hotel" },
+        { name: "金海國際機場", lat: 35.1795, lng: 128.9382, time: "07:00", desc: "抵達機場，辦理託運、退稅與免稅品採購", type: "transport" }
+      ]
+    };
+    
+    let map = null;
+    let markerLayerGroup = null;
+    let polylineRoute = null;
+    let currentActiveDay = 1;
+
+    // 初始化地圖
+    function initMap() {
+      // 建立地圖實例，預設中心在海雲台
+      map = L.map('itinerary-map', {
+        zoomControl: true,
+        scrollWheelZoom: false // 滾輪不自動放大
+      }).setView([35.1616, 129.1601], 12);
+
+      // 載入 CartoDB 暗色圖資，與 UI 風格一致
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      }).addTo(map);
+
+      // 建立 Marker 圖層群組
+      markerLayerGroup = L.layerGroup().addTo(map);
+
+      // 預設載入 Day 1 的地圖
+      updateMapForDay(1);
+    }
+
+    // 根據天數更新地圖標記與折線
+    function updateMapForDay(dayNum) {
+      currentActiveDay = dayNum;
+      
+      // 解決隱藏容器大小為 0 導致 Leaflet 載入不全的問題
+      if (map) {
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 150);
+      }
+      
+      // 更新地圖卡片上的標題
+      const mapTitleEl = document.getElementById("map-day-title");
+      if (mapTitleEl) {
+        mapTitleEl.innerText = `DAY ${dayNum}`;
+      }
+
+      // 清除舊的 Marker 與 Polyline
+      if (markerLayerGroup) {
+        markerLayerGroup.clearLayers();
+      }
+      if (polylineRoute) {
+        map.removeLayer(polylineRoute);
+      }
+
+      const locations = mapLocations[dayNum];
+      if (!locations || locations.length === 0) return;
+
+      const latlngs = [];
+      
+      // 根據景點繪製自訂 Marker
+      locations.forEach((loc, index) => {
+        const latlng = [loc.lat, loc.lng];
+        if (loc.type !== "rainy_backup") {
+          latlngs.push(latlng);
+        }
+
+        // 決定標記樣式與色調
+        let markerClass = "marker-pin";
+        if (loc.type === "hotel") {
+          markerClass += " hotel-marker";
+        } else if (loc.type === "food") {
+          markerClass += " food-marker";
+        } else if (loc.type === "rainy_backup") {
+          markerClass += " rainy-marker";
+        } else if (index === 0 || index === locations.length - 1) {
+          markerClass += " sec-color";
+        }
+
+        // 建立自訂的 DivIcon 標記元件
+        let markerHtml = `<div class="${markerClass}"></div><div class="marker-number">${index + 1}</div>`;
+        if (loc.type === "rainy_backup") {
+          markerHtml = `<div class="${markerClass}"></div><div class="marker-number" style="font-size: 0.75rem; line-height: 26px;">☔</div>`;
+        }
+        const customIcon = L.divIcon({
+          className: 'custom-map-marker',
+          html: markerHtml,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42],
+          popupAnchor: [0, -36]
+        });
+
+        // 氣泡框 HTML 內容
+        const popupName = loc.type === "rainy_backup" ? `☔ ${loc.name}` : `${index + 1}. ${loc.name}`;
+        const popupContent = `
+          <div style="font-family: var(--font-sans);">
+            <h4 style="margin: 0 0 6px 0; color: ${loc.type === 'rainy_backup' ? '#38bdf8' : 'var(--primary)'}; font-size: 0.95rem; font-weight: 700;">${popupName}</h4>
+            <div style="font-size: 0.75rem; color: #ffcd00; font-weight: 700; margin-bottom: 6px;">
+              <i class="fa-regular fa-clock"></i> ${loc.time}
+            </div>
+            <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;">${loc.desc}</p>
+          </div>
+        `;
+
+        // 建立 Leaflet Marker 並加入地圖
+        const marker = L.marker(latlng, { icon: customIcon })
+          .bindPopup(popupContent)
+          .addTo(markerLayerGroup);
+
+        // 記錄 Marker 實例
+        loc.markerInstance = marker;
+      });
+
+      // 用虛線連線景點
+      polylineRoute = L.polyline(latlngs, {
+        color: '#6366f1',
+        weight: 3,
+        opacity: 0.6,
+        dashArray: '6, 8',
+        lineCap: 'round',
+        lineJoin: 'round'
+      }).addTo(map);
+
+      // 自動調整地圖縮放級別與中心點
+      if (latlngs.length > 0) {
+        if (latlngs.length === 1) {
+          map.setView(latlngs[0], 14);
+        } else {
+          map.fitBounds(L.latLngBounds(latlngs), {
+            padding: [40, 40],
+            maxZoom: 15
+          });
+        }
+      }
+    }
+
+    // 重設地圖視角
+    function resetMapZoom() {
+      const locations = mapLocations[currentActiveDay];
+      if (!locations || locations.length === 0) return;
+      
+      const latlngs = locations.map(loc => [loc.lat, loc.lng]);
+      if (latlngs.length > 0) {
+        if (latlngs.length === 1) {
+          map.setView(latlngs[0], 14);
+        } else {
+          map.fitBounds(L.latLngBounds(latlngs), {
+            padding: [40, 40]
+          });
+        }
+      }
+    }
+
+    // 行動版地圖彈窗開關
+    function toggleMobileMap(show) {
+      const mapCol = document.querySelector(".itinerary-map-col");
+      if (!mapCol) return;
+      
+      if (show) {
+        mapCol.classList.add("show");
+        // 彈窗顯示後，強迫 Leaflet 重新整理大小
+        setTimeout(() => {
+          if (map) {
+            map.invalidateSize();
+            resetMapZoom();
+          }
+        }, 300);
+      } else {
+        mapCol.classList.remove("show");
+      }
+    }
+
+    // 當點擊時間軸中的某個景點時，地圖對焦至該點
+    function focusMapOnLocation(dayNum, index) {
+      const locations = mapLocations[dayNum];
+      if (!locations || !locations[index]) return;
+      
+      const loc = locations[index];
+      
+      // 如果是行動版，平滑滾動到地圖卡片的位置，方便查看
+      if (window.innerWidth <= 1024) {
+        const mapCol = document.querySelector(".itinerary-map-col");
+        if (mapCol) {
+          mapCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      
+      // 平滑平移至該經緯度
+      setTimeout(() => {
+        map.flyTo([loc.lat, loc.lng], 15, {
+          animate: true,
+          duration: 1.2
+        });
+
+        // 延遲開啟 Popup 並讓標記閃爍/脈動
+        setTimeout(() => {
+          if (loc.markerInstance) {
+            loc.markerInstance.openPopup();
+            
+            // 取得 marker 元素並加上脈動動畫
+            const markerElement = loc.markerInstance.getElement();
+            if (markerElement) {
+              const pin = markerElement.querySelector(".marker-pin");
+              if (pin) {
+                pin.classList.add("pulsing-focused-marker");
+                // 3次動畫後移除，避免持續佔用 CPU
+                setTimeout(() => {
+                  pin.classList.remove("pulsing-focused-marker");
+                }, 2400);
+              }
+            }
+          }
+        }, 700);
+      }, window.innerWidth <= 1024 ? 300 : 0);
+
+
+
+      // 時間軸卡片閃爍動畫
+      const timelineCol = document.getElementById(`day-panel-${dayNum}`);
+      if (timelineCol) {
+        const items = timelineCol.querySelectorAll(".timeline-item");
+        items.forEach(item => item.classList.remove("highlight-map"));
+        
+        const targetItem = items[index];
+        if (targetItem) {
+          targetItem.classList.add("highlight-map");
+          setTimeout(() => {
+            targetItem.classList.remove("highlight-map");
+          }, 3000);
+        }
+      }
+    }
+
+    // 動態在時間軸卡片中加入「地圖定位」按鈕
+    function setupTimelineInteractions() {
+      for (let day = 1; day <= 6; day++) {
+        const panel = document.getElementById(`day-panel-${day}`);
+        if (!panel) continue;
+
+        const locations = mapLocations[day];
+        if (!locations) continue;
+
+        const items = panel.querySelectorAll(".timeline-item");
+        items.forEach((item, index) => {
+          if (!locations[index]) return; // Only add Map Button if location exists
+
+          const contentEl = item.querySelector(".timeline-content");
+          if (!contentEl) return;
+
+          const header = contentEl.querySelector(".timeline-header");
+          if (!header) return;
+
+          // 新增地圖定位按鈕
+          const mapBtn = document.createElement("button");
+          mapBtn.className = "timeline-item-link-btn";
+          mapBtn.innerHTML = `<i class="fa-solid fa-location-crosshairs"></i> 地圖定位`;
+          mapBtn.onclick = (e) => {
+            e.stopPropagation();
+            focusMapOnLocation(day, index);
+          };
+
+          const infoCol = contentEl.querySelector(".timeline-card-grid > div");
+          if (infoCol) {
+            infoCol.appendChild(mapBtn);
+          }
+
+          // 偵測並在「雨天替代方案」框中加入地圖定位按鈕
+          const rainyBox = contentEl.querySelector(".rainy-alternative-box");
+          if (rainyBox) {
+            const rainyText = rainyBox.innerText;
+            let matchIndex = -1;
+            for (let i = 0; i < locations.length; i++) {
+              const locName = locations[i].name;
+              let keyword = "";
+              if (locName.includes("Ryan Holiday")) keyword = "Ryan Holiday";
+              else if (locName.includes("Spa Land")) keyword = "Spa Land";
+              else if (locName.includes("Running Man")) keyword = "Running Man";
+              else if (locName.includes("國立海洋科技博物館")) keyword = "國立海洋科技博物館";
+              else if (locName.includes("樂天 Premium Outlet")) keyword = "Outlet";
+              else if (locName.includes("Sea Life")) keyword = "Sea Life";
+              else if (locName.includes("P.ARK")) keyword = "P.ARK";
+
+              if (keyword && rainyText.includes(keyword)) {
+                matchIndex = i;
+                break;
+              }
+            }
+
+            if (matchIndex !== -1) {
+              const mapRainyBtn = document.createElement("button");
+              mapRainyBtn.className = "timeline-item-link-btn";
+              mapRainyBtn.style.background = "rgba(56, 189, 248, 0.12)";
+              mapRainyBtn.style.borderColor = "rgba(56, 189, 248, 0.3)";
+              mapRainyBtn.style.color = "#38bdf8";
+              mapRainyBtn.style.marginTop = "8px";
+              mapRainyBtn.style.display = "inline-flex";
+              mapRainyBtn.style.alignItems = "center";
+              mapRainyBtn.style.gap = "6px";
+              mapRainyBtn.innerHTML = `<i class="fa-solid fa-location-crosshairs"></i> 定位備案地圖`;
+              
+              const targetIdx = matchIndex;
+              mapRainyBtn.onclick = (e) => {
+                e.stopPropagation();
+                focusMapOnLocation(day, targetIdx);
+              };
+
+              mapRainyBtn.onmouseenter = () => {
+                mapRainyBtn.style.background = "rgba(56, 189, 248, 0.22)";
+              };
+              mapRainyBtn.onmouseleave = () => {
+                mapRainyBtn.style.background = "rgba(56, 189, 248, 0.12)";
+              };
+
+              rainyBox.appendChild(document.createElement("br"));
+              rainyBox.appendChild(mapRainyBtn);
+            }
+          }
+        });
+
+        // 偵測並在單日底部的「雨天備案總結框」中加入地圖定位按鈕
+        const rainyDayBox = panel.querySelector(".rainy-day-box");
+        if (rainyDayBox) {
+          const rainyText = rainyDayBox.innerText;
+          const btnContainer = document.createElement("div");
+          btnContainer.style.marginTop = "12px";
+          btnContainer.style.display = "flex";
+          btnContainer.style.gap = "8px";
+          btnContainer.style.flexWrap = "wrap";
+
+          locations.forEach((loc, locIndex) => {
+            let keyword = "";
+            let btnName = "";
+
+            if (loc.name.includes("Ryan Holiday")) {
+              keyword = "Ryan Holiday";
+              btnName = "Ryan Holiday";
+            } else if (loc.name.includes("Spa Land")) {
+              keyword = "Spa Land";
+              btnName = "Spa Land 汗蒸幕";
+            } else if (loc.name.includes("Running Man")) {
+              keyword = "Running Man";
+              btnName = "三井大樓 / Running Man";
+            } else if (loc.name.includes("國立海洋科技博物館")) {
+              keyword = "海洋科技博物館";
+              btnName = "海洋科技博物館";
+            } else if (loc.name.includes("樂天 Premium Outlet")) {
+              keyword = "Outlet";
+              btnName = "樂天 Outlet";
+            } else if (loc.name.includes("Sea Life")) {
+              keyword = "水族館";
+              btnName = "Sea Life 水族館";
+            } else if (loc.name.includes("P.ARK")) {
+              keyword = "P.ARK";
+              btnName = "P.ARK 咖啡館";
+            } else if (loc.name.includes("南浦地下街")) {
+              keyword = "南浦地下街";
+              btnName = "南浦地下街";
+            }
+
+            if (keyword && rainyText.includes(keyword)) {
+              const btn = document.createElement("button");
+              btn.className = "map-focus-btn";
+              btn.style.background = "rgba(56, 189, 248, 0.12)";
+              btn.style.borderColor = "rgba(56, 189, 248, 0.4)";
+              btn.style.color = "#38bdf8";
+              btn.style.padding = "6px 12px";
+              btn.style.fontSize = "0.8rem";
+              btn.style.borderRadius = "6px";
+              btn.style.cursor = "pointer";
+              btn.style.transition = "all var(--transition-fast)";
+              btn.innerHTML = `<i class="fa-solid fa-location-crosshairs"></i> 定位：${btnName}`;
+              
+              btn.onclick = (e) => {
+                e.stopPropagation();
+                focusMapOnLocation(day, locIndex);
+              };
+
+              btn.onmouseenter = () => {
+                btn.style.background = "rgba(56, 189, 248, 0.22)";
+              };
+              btn.onmouseleave = () => {
+                btn.style.background = "rgba(56, 189, 248, 0.12)";
+              };
+
+              btnContainer.appendChild(btn);
+            }
+          });
+
+          if (btnContainer.children.length > 0) {
+            rainyDayBox.appendChild(btnContainer);
+          }
+        }
+      }
+    }
+    
+        // DOM 載入後執行初始化
+    document.addEventListener("DOMContentLoaded", () => {
+      // 確保 Leaflet 已載入後才初始化
+      if (typeof L !== 'undefined') {
+        initMap();
+        setupTimelineInteractions();
+      }
+    });
+  </script>
+</body>
+</html>
